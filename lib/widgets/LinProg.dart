@@ -19,7 +19,7 @@ class LinProg extends StatelessWidget {
           Text(num.toString(), style: TextStyle(fontFamily: "IranSansNum"),),
           SizedBox(width: 7,),
           Container(
-            width: constraints.maxWidth * 0.8,
+            width: constraints.maxWidth * 0.6,
             child: Stack(children: [
               Container(
                 height: 7,

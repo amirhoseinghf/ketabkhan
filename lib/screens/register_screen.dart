@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../models/User.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/register";
+  final User current;
+  RegisterScreen(this.current);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  String email;
   String userName;
   String password;
+
 
   var _formKey = GlobalKey<FormState>();
 
@@ -76,6 +81,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: Icon(Icons.mail)),
                                       keyboardType: TextInputType.emailAddress,
+                                      onChanged: (mail) => email = mail,
                                       validator: (emailAddress) {
                                         if (emailAddress.length == 0) return "مقدار ایمیل نمی تواند خالی باشد";
                                         else if (!emailAddress.contains("@") || !emailAddress.contains(".")) return "ایمیل شما نامعتبر می باشد";
@@ -146,6 +152,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ElevatedButton(
                                         onPressed: () {if(_formKey.currentState.validate()) {
                                           print("Done");
+                                          widget.current.email = email;
+                                          widget.current.userName = userName;
+                                          widget.current.password = password;
                                         }},
                                         child: Text("ثبت نام", style: TextStyle(fontSize: 17),),
                                         style: ButtonStyle(
