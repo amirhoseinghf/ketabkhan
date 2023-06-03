@@ -65,6 +65,11 @@ flutter:
   assets:
     - assets/images/logofinal2.svg
     - assets/images/ketabkhan.svg
+    - assets/images/genres/fiction.jpg
+    - assets/images/genres/history.jpg
+    - assets/images/genres/horror.jpg
+    - assets/images/genres/romance.jpg
+    - assets/images/shop_banner.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

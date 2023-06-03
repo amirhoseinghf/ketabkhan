@@ -11,11 +11,17 @@ enum Type {
   soundBooks
 }
 
+enum Genre {
+  romance,
+  fiction,
+  history,
+  horror
+}
 class Book {
   final String id;
   final String name;
   final String author;
-  final String genre;
+  final Genre genre;
   final int price;
   final Category category;
   final String imageUrl;

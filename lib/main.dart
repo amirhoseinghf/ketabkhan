@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         author: "مت هیگ",
         price: 25,
         category: Category.new_release,
+        genre: Genre.fiction,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/125302_50943_normal.jpg?width=200"),
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         author: "سو آنسن",
         price: 39,
         category: Category.top_selling,
+        genre: Genre.romance,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136671_72256_normal.jpg?width=200"),
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
         author: "جیمز کلیر",
         price: 45,
         category: Category.favorite,
+        genre: Genre.fiction,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136068_15784_normal.jpg?width=200"),
@@ -46,6 +49,7 @@ class MyApp extends StatelessWidget {
         author: "جیمز کوییک",
         price: 79,
         category: Category.new_release,
+        genre: Genre.horror,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136159_76305_normal.jpg?width=200"),
@@ -55,6 +59,7 @@ class MyApp extends StatelessWidget {
         author: "کوین هرسلی",
         price: 95,
         category: Category.top_selling,
+        genre: Genre.history,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/86186_36247_normal.jpg?width=200",
@@ -65,6 +70,7 @@ class MyApp extends StatelessWidget {
       author: "لوئیس لوری",
       price: 37,
       category: Category.favorite,
+      genre: Genre.fiction,
       type: Type.soundBooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/78598_85402_normal.jpg?width=200",
@@ -75,6 +81,7 @@ class MyApp extends StatelessWidget {
       author: "جورج اورول",
       price: 24,
       category: Category.top_selling,
+      genre: Genre.horror,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/99473_44720_normal.jpg?width=200",
@@ -85,6 +92,7 @@ class MyApp extends StatelessWidget {
       author: "پیتر دراکر",
       price: 24,
       category: Category.new_release,
+      genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/85481_79104_normal.jpg?width=200",
@@ -95,6 +103,7 @@ class MyApp extends StatelessWidget {
       author: "الیف شافاک",
       price: 25,
       category: Category.top_selling,
+      genre: Genre.history,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/4339_22364_normal.jpg?width=200",
@@ -105,6 +114,7 @@ class MyApp extends StatelessWidget {
       author: "جوجو مویز",
       price: 29,
       category: Category.favorite,
+      genre: Genre.fiction,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/65672_11136_normal.jpg?width=200",
@@ -115,6 +125,7 @@ class MyApp extends StatelessWidget {
       author: "اروین یالوم",
       price: 34,
       category: Category.favorite,
+      genre: Genre.horror,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/62882_79534_normal.jpg?width=200",
@@ -125,6 +136,7 @@ class MyApp extends StatelessWidget {
       author: "روث ور",
       price: 34,
       category: Category.new_release,
+      genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/71164_29991_normal.jpg?width=200",
