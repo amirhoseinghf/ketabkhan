@@ -4,8 +4,7 @@ import '../models/User.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/register";
-  final User current;
-  RegisterScreen(this.current);
+
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -152,9 +151,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ElevatedButton(
                                         onPressed: () {if(_formKey.currentState.validate()) {
                                           print("Done");
-                                          widget.current.email = email;
-                                          widget.current.userName = userName;
-                                          widget.current.password = password;
                                         }},
                                         child: Text("ثبت نام", style: TextStyle(fontSize: 17),),
                                         style: ButtonStyle(

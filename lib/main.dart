@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ketabkhan/screens/shop_screen.dart';
+import './screens/shop_screen.dart';
+import './screens/user_screen.dart';
 import './models/Book.dart';
 import './models/User.dart';
-import 'package:ketabkhan/screens/details_screen.dart';
+import './screens/details_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/register_screen.dart';
@@ -10,7 +11,25 @@ import './screens/library_screen.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+
+  static _MyAppState of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
+
+
+}
+
+class _MyAppState extends State<MyApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+  void changeTheme(ThemeMode themeMode) {
+    setState(() {
+      _themeMode = themeMode;
+    });
+  }
+
+  User emma = new User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
 
   List<Book> dummy_books = [
     Book(
@@ -143,7 +162,6 @@ class MyApp extends StatelessWidget {
     ),
   ];
 
-
   List<Book> tempList = [
     Book(
       id: "A1",
@@ -212,7 +230,6 @@ class MyApp extends StatelessWidget {
       "https://newcdn.fidibo.com/images/books/99473_44720_normal.jpg?width=200",
     ),];
 
-  User currentUser = new User("admin", "admin", "123");
 
   @override
   Widget build(BuildContext context) {
@@ -237,17 +254,19 @@ class MyApp extends StatelessWidget {
         buttonTheme: const ButtonThemeData(buttonColor: Color.fromRGBO(11, 94, 160, 1),)
       ),
       darkTheme: ThemeData.dark(),
+      themeMode: _themeMode,
 
 
 
-      initialRoute: LibraryScreen.routeName,
+      initialRoute: UserScreen.routeName,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        RegisterScreen.routeName: (context) => RegisterScreen(currentUser),
+        RegisterScreen.routeName: (context) => RegisterScreen(),
         HomeScreen.routeName: (context) => HomeScreen(dummy_books),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(tempList),
         ShopScreen.routeName: (context) => ShopScreen(dummy_books),
+        UserScreen.routeName: (context) => UserScreen(emma),
       },
     );
   }

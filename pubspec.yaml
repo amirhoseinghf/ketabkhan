@@ -70,6 +70,9 @@ flutter:
     - assets/images/genres/horror.jpg
     - assets/images/genres/romance.jpg
     - assets/images/shop_banner.jpg
+    - assets/images/theme/darkMode.png
+    - assets/images/theme/lightMode.png
+    - assets/images/theme/lightDarkMode.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
