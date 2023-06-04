@@ -8,8 +8,10 @@ class BookWidget extends StatelessWidget {
   String author;
   int price;
 
-  BookWidget({this.name, this.author, this.imageUrl, this.price});
-  
+  ThemeMode themeMode;
+
+  BookWidget({this.name, this.author, this.imageUrl, this.price, this.themeMode});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -19,7 +21,7 @@ class BookWidget extends StatelessWidget {
           child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(imageUrl, fit: BoxFit.cover,))),
-      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(imageUrl:imageUrl, author: author, price: price, bookName: name,)));},
+      onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(imageUrl:imageUrl, author: author, price: price, bookName: name, themeMode: themeMode,)));},
     );
   }
 }

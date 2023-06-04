@@ -73,6 +73,7 @@ flutter:
     - assets/images/theme/darkMode.png
     - assets/images/theme/lightMode.png
     - assets/images/theme/lightDarkMode.png
+    - assets/images/logofinal1.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

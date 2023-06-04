@@ -20,7 +20,7 @@ class CurrentReadingBookWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             child: Image.network(imageUrl, fit: BoxFit.cover,))),
           SizedBox(height: 10,),
-          Text(name, style: Theme.of(context).textTheme.bodyMedium,),
+          Text(name, style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSans", fontWeight: FontWeight.bold),),
           SizedBox(height: 5,),
           Container(
             decoration: BoxDecoration(border: Border.all(color: Colors.white), borderRadius: BorderRadius.circular(5)),
@@ -30,7 +30,7 @@ class CurrentReadingBookWidget extends StatelessWidget {
               children: [
               Icon(Icons.percent, size: Theme.of(context).textTheme.bodySmall.fontSize, color: Colors.white,),
               SizedBox(width: 3,),
-              Text("24", style: Theme.of(context).textTheme.bodySmall),
+              Text("24", style: TextStyle(fontFamily: "IranSansNum", fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white)),
             ],),
           ),
         ],

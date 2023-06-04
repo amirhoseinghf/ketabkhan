@@ -9,8 +9,9 @@ class ShopScreen extends StatefulWidget {
   static const routeName = '/shop';
 
   final List<Book> bookList;
+  ThemeMode themeMode;
 
-  ShopScreen(this.bookList);
+  ShopScreen(this.bookList, this.themeMode);
 
   @override
   State<ShopScreen> createState() => _ShopScreenState();
@@ -263,7 +264,7 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                       Text(
                         title,
-                        style: TextStyle(fontSize: 24, color: brightness == Brightness.dark ? Colors.white : Colors.black),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       )
                     ],
                   ),

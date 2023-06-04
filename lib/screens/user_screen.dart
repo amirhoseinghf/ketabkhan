@@ -9,6 +9,7 @@ class UserScreen extends StatefulWidget {
 
 
 
+
   final User user;
 
   UserScreen(this.user);
@@ -18,12 +19,12 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-  ThemeMode current = ThemeMode.system;
+
 
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-
+    ThemeMode current = MyApp.of(context).getTheme() == ThemeMode.dark ? ThemeMode.dark : ThemeMode.light ;
     Widget userDetails() {
       return Column(
         children: [
@@ -43,6 +44,7 @@ class _UserScreenState extends State<UserScreen> {
                     fit: BoxFit.contain,
                     // color: Colors.white,
                     height: 5,
+                    errorBuilder: (context, child, loadingProgress) => Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,),
                   ))),
           SizedBox(
             height: 10,
@@ -216,41 +218,6 @@ class _UserScreenState extends State<UserScreen> {
                           (states) => Colors.white))
                 ],
               ),
-              Column(
-                children: [
-                  Container(
-                      height: 100,
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                              "assets/images/theme/lightDarkMode.png",))),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    "سیستم",
-                    style: TextStyle(
-                      fontFamily: "IranSans",
-                      fontSize: 15,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 0,
-                  ),
-                  Radio(
-                    value: ThemeMode.system,
-                    groupValue: current,
-                    onChanged: (m) {
-                      setState(() {
-                        current = m;
-                        MyApp.of(context).changeTheme(ThemeMode.system);
-                      });
-                    },
-                    fillColor: MaterialStateColor.resolveWith(
-                        (states) => Colors.white),
-                  )
-                ],
-              )
             ],
           )
         ],

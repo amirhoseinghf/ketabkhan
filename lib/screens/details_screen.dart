@@ -10,9 +10,10 @@ class DetailsScreen extends StatefulWidget {
   String bookName;
   String author;
   int price;
+  ThemeMode themeMode;
 
   DetailsScreen(
-      {@required this.imageUrl, this.bookName, this.author, this.price});
+      {@required this.imageUrl, this.bookName, this.author, this.price, this.themeMode});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -38,6 +39,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     var deviceSize = MediaQuery.of(context).size;
 
+    bool isLightMode = widget.themeMode == ThemeMode.light || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.light);
+
 
     double addAndReturnSum(double rating) {
       setState(() {
@@ -55,7 +58,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         return sum;
       });
     }
-    
+
     double percent(int num) {
 
       switch(num) {
@@ -96,12 +99,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
           Text(
             widget.bookName,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           SizedBox(
             height: 5,
           ),
-          Text(widget.author, style: Theme.of(context).textTheme.titleSmall),
+          Text(widget.author, style: Theme.of(context).textTheme.titleSmall,)
         ],
       );
     }
@@ -116,7 +119,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               RatingBar(
                 minRating: 1,
                 maxRating: 5,
-                initialRating: 3,
+                initialRating: currentRating,
                 itemSize: 20,
                 ratingWidget: RatingWidget(
                   full: const Icon(
@@ -138,8 +141,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 height: 5,
               ),
               Text(
-                "از 192 رای",
-                style: TextStyle(color: Colors.grey, fontSize: 13),
+                "از ${count.toStringAsFixed(0)} رای",
+                style: TextStyle(color: Colors.grey, fontSize: 13, fontFamily: "IranSans"),
               ),
             ],
           ),
@@ -156,18 +159,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                backgroundColor: brightness != Brightness.dark
-                    ? Theme.of(context).primaryColor
-                    : Colors.white,
+                backgroundColor: Theme.of(context).buttonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 padding: EdgeInsets.all(20),
               ),
               child: Text(
                 " خرید | ${widget.price} هزار تومان",
-                style: brightness != Brightness.dark
-                    ? Theme.of(context).textTheme.bodyMedium
-                    : TextStyle(fontSize: 15, color: Colors.black87),
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
           ),
@@ -184,14 +183,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     onPressed: () {},
                     child: Text(
                       "نمونه",
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.bodyMedium
                     ),
                     style: OutlinedButton.styleFrom(
                         side: BorderSide(
                             width: 1.0,
-                            color: brightness != Brightness.dark
-                                ? Theme.of(context).primaryColor
-                                : Colors.white),
+                            color: Theme.of(context).buttonColor),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   )),
@@ -205,10 +202,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     onPressed: () {},
                     child: Text(
                       "خرید اشتراک ویژه",
-                      style: TextStyle(fontSize: 16, color: Colors.purple),
+                      style: TextStyle(fontSize: 16, color: Colors.amber),
                     ),
                     style: OutlinedButton.styleFrom(
-                        side: BorderSide(width: 1.0, color: Colors.purple),
+                        side: BorderSide(width: 1.0, color: Colors.amber),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   ))
@@ -224,12 +221,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
           child: RichText(
               text: TextSpan(
                   text:
-                      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد. ادامه توضیحات..",
-                  style: TextStyle(
-                      color: brightness != Brightness.dark
-                          ? Colors.black
-                          : Colors.white,
-                  fontFamily: "IranSans"))));
+                  "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد. ادامه توضیحات..",
+                  style: Theme.of(context).textTheme.bodySmall)));
     }
 
     Widget BookDetails() {
@@ -246,7 +239,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ListTile(
                   leading: Text(
                     "نام نویسنده",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     widget.author,
@@ -257,33 +250,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ListTile(
                   leading: Text(
                     "قیمت",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "${widget.price} هزار تومان",
-                    style: TextStyle(color: Theme.of(context).accentColor),
+                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSansNum"),
                   ),
                 ),
                 Divider(),
                 ListTile(
                   leading: Text(
                     "ژانر",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "فانتزی",
-                    style: TextStyle(color: Theme.of(context).accentColor),
+                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSans"),
                   ),
                 ),
                 Divider(),
                 ListTile(
                   leading: Text(
                     "دسته بندی",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9)),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "کتاب های الکترونیک",
-                    style: TextStyle(color: Theme.of(context).accentColor),
+                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSans"),
                   ),
                 ),
               ],
@@ -303,9 +296,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                Text("به این کتاب امتیاز دهید", style: TextStyle(fontFamily: "IranSans", fontWeight: FontWeight.bold, fontSize: 15),),
-                Text("نظر خود را با دیگران به اشتراک بگذارید", style: TextStyle(fontFamily: "IranSans", fontSize: 10)),
-              ],),
+                  Text("به این کتاب امتیاز دهید", style: TextStyle(fontFamily: "IranSans", fontWeight: FontWeight.bold, fontSize: 15),),
+                  Text("نظر خود را با دیگران به اشتراک بگذارید", style: TextStyle(fontFamily: "IranSans", fontSize: 10)),
+                ],),
             ],
           ),
           SizedBox(height: 15,),
@@ -316,7 +309,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             onRatingUpdate: addAndReturnSum,
             minRating: 1,
             maxRating: 5,
-            allowHalfRating: true,
+            // allowHalf: true,
             ratingWidget: RatingWidget(
                 full: Icon(
                   Icons.star_rounded,
@@ -329,40 +322,40 @@ class _DetailsScreenState extends State<DetailsScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-            Column(children: [
-              Text(currentRating.toStringAsFixed(1), style: TextStyle(fontFamily: "IranSansNum", fontWeight: FontWeight.bold, fontSize: 40,),),
-              RatingBar(
-                initialRating: currentRating,
-                minRating: 0,
-                maxRating: 5,
-                allowHalfRating: true,
-                itemSize: 20,
-                ratingWidget: RatingWidget(
-                    full: Icon(
-                      Icons.star_rounded,
-                      color: Colors.amber,
-                    ),
-                    empty: Icon(Icons.star, color: Colors.white),
-                    half: Icon(Icons.star_half_rounded, color: Colors.amber)),
-                ignoreGestures: true,
-              ),
-              SizedBox(height: 5,),
-              Text("${count} تعداد نظرات ", style: TextStyle(fontFamily: "IranSansNum", fontSize: 15,),),
-            ],),
-            Container(
-              width: 240,
-              height: 140,
-              child: Center(
-                child: ListView.builder(
-                    itemCount: 5,
-                    shrinkWrap: true,
-                    itemBuilder: (ctx, i) {
-                      int n = 5;
-                      return LinProg(n - i, percent(n - i));
-                    }),
+              Column(children: [
+                Text(currentRating.toStringAsFixed(1), style: TextStyle(fontFamily: "IranSansNum", fontWeight: FontWeight.bold, fontSize: 40,),),
+                RatingBar(
+                  initialRating: currentRating,
+                  minRating: 0,
+                  maxRating: 5,
+                  allowHalfRating: true,
+                  itemSize: 20,
+                  ratingWidget: RatingWidget(
+                      full: Icon(
+                        Icons.star_rounded,
+                        color: Colors.amber,
+                      ),
+                      empty: Icon(Icons.star, color: Colors.white),
+                      half: Icon(Icons.star_half_rounded, color: Colors.amber)),
+                  ignoreGestures: true,
+                ),
+                SizedBox(height: 5,),
+                Text("${count} تعداد نظرات ", style: TextStyle(fontFamily: "IranSansNum", fontSize: 15,),),
+              ],),
+              Container(
+                  width: 200,
+                  height: 140,
+                  child: Center(
+                    child: ListView.builder(
+                        itemCount: 5,
+                        shrinkWrap: true,
+                        itemBuilder: (ctx, i) {
+                          int n = 5;
+                          return LinProg(n - i, percent(n - i));
+                        }),
+                  )
               )
-            )
-          ],)
+            ],)
 
         ],),
       );

@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import './screens/tabs_screen.dart';
 import './screens/shop_screen.dart';
 import './screens/user_screen.dart';
 import './models/Book.dart';
@@ -16,17 +18,29 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 
+
   static _MyAppState of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
 
 
 }
 
 class _MyAppState extends State<MyApp> {
+
+  Brightness brigh = Brightness.light;
   ThemeMode _themeMode = ThemeMode.light;
   void changeTheme(ThemeMode themeMode) {
     setState(() {
       _themeMode = themeMode;
+      if(themeMode == ThemeMode.dark) {
+        brigh = Brightness.dark;
+      } else if (themeMode == ThemeMode.light) {
+        brigh = Brightness.light;
+      }
     });
+  }
+
+  ThemeMode getTheme() {
+    return _themeMode;
   }
 
   User emma = new User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
@@ -37,7 +51,7 @@ class _MyAppState extends State<MyApp> {
         name: "کتابخانه نیمه‌ شب",
         author: "مت هیگ",
         price: 25,
-        category: Category.new_release,
+        category: Categoryz.new_release,
         genre: Genre.fiction,
         type: Type.ebooks,
         imageUrl:
@@ -47,7 +61,7 @@ class _MyAppState extends State<MyApp> {
         name: "محکم در آغوشم بگیر",
         author: "سو آنسن",
         price: 39,
-        category: Category.top_selling,
+        category: Categoryz.top_selling,
         genre: Genre.romance,
         type: Type.soundBooks,
         imageUrl:
@@ -57,7 +71,7 @@ class _MyAppState extends State<MyApp> {
         name: "خرده‌ عادت‌ ها",
         author: "جیمز کلیر",
         price: 45,
-        category: Category.favorite,
+        category: Categoryz.favorite,
         genre: Genre.fiction,
         type: Type.ebooks,
         imageUrl:
@@ -67,7 +81,7 @@ class _MyAppState extends State<MyApp> {
         name: "بی‌ حد و مرز",
         author: "جیمز کوییک",
         price: 79,
-        category: Category.new_release,
+        category: Categoryz.new_release,
         genre: Genre.horror,
         type: Type.soundBooks,
         imageUrl:
@@ -77,7 +91,7 @@ class _MyAppState extends State<MyApp> {
         name: "حافظه نامحدود",
         author: "کوین هرسلی",
         price: 95,
-        category: Category.top_selling,
+        category: Categoryz.top_selling,
         genre: Genre.history,
         type: Type.ebooks,
         imageUrl:
@@ -88,7 +102,7 @@ class _MyAppState extends State<MyApp> {
       name: "بخشنده",
       author: "لوئیس لوری",
       price: 37,
-      category: Category.favorite,
+      category: Categoryz.favorite,
       genre: Genre.fiction,
       type: Type.soundBooks,
       imageUrl:
@@ -99,7 +113,7 @@ class _MyAppState extends State<MyApp> {
       name: "1984",
       author: "جورج اورول",
       price: 24,
-      category: Category.top_selling,
+      category: Categoryz.top_selling,
       genre: Genre.horror,
       type: Type.ebooks,
       imageUrl:
@@ -110,7 +124,7 @@ class _MyAppState extends State<MyApp> {
       name: "مدیریت خود",
       author: "پیتر دراکر",
       price: 24,
-      category: Category.new_release,
+      category: Categoryz.new_release,
       genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
@@ -121,7 +135,7 @@ class _MyAppState extends State<MyApp> {
       name: "ملت عشق",
       author: "الیف شافاک",
       price: 25,
-      category: Category.top_selling,
+      category: Categoryz.top_selling,
       genre: Genre.history,
       type: Type.ebooks,
       imageUrl:
@@ -132,7 +146,7 @@ class _MyAppState extends State<MyApp> {
       name: "من پیش از تو",
       author: "جوجو مویز",
       price: 29,
-      category: Category.favorite,
+      category: Categoryz.favorite,
       genre: Genre.fiction,
       type: Type.ebooks,
       imageUrl:
@@ -143,7 +157,7 @@ class _MyAppState extends State<MyApp> {
       name: "وقتی نیچه گریست",
       author: "اروین یالوم",
       price: 34,
-      category: Category.favorite,
+      category: Categoryz.favorite,
       genre: Genre.horror,
       type: Type.ebooks,
       imageUrl:
@@ -154,7 +168,7 @@ class _MyAppState extends State<MyApp> {
       name: " زنی در کابین ۱۰",
       author: "روث ور",
       price: 34,
-      category: Category.new_release,
+      category: Categoryz.new_release,
       genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
@@ -164,20 +178,20 @@ class _MyAppState extends State<MyApp> {
 
   List<Book> tempList = [
     Book(
-      id: "A1",
-      name: "کتابخانه نیمه‌ شب",
-      author: "مت هیگ",
-      price: 25,
-      category: Category.new_release,
-      type: Type.ebooks,
-      imageUrl:
-      "https://newcdn.fidibo.com/images/books/125302_50943_normal.jpg?width=200"),
+        id: "A1",
+        name: "کتابخانه نیمه‌ شب",
+        author: "مت هیگ",
+        price: 25,
+        category: Categoryz.new_release,
+        type: Type.ebooks,
+        imageUrl:
+        "https://newcdn.fidibo.com/images/books/125302_50943_normal.jpg?width=200"),
     Book(
         id: "A2",
         name: "محکم در آغوشم بگیر",
         author: "سو آنسن",
         price: 39,
-        category: Category.top_selling,
+        category: Categoryz.top_selling,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136671_72256_normal.jpg?width=200"),
@@ -186,7 +200,7 @@ class _MyAppState extends State<MyApp> {
         name: "خرده‌ عادت‌ ها",
         author: "جیمز کلیر",
         price: 45,
-        category: Category.favorite,
+        category: Categoryz.favorite,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136068_15784_normal.jpg?width=200"),
@@ -195,7 +209,7 @@ class _MyAppState extends State<MyApp> {
         name: "بی‌ حد و مرز",
         author: "جیمز کوییک",
         price: 79,
-        category: Category.new_release,
+        category: Categoryz.new_release,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136159_76305_normal.jpg?width=200"),
@@ -204,7 +218,7 @@ class _MyAppState extends State<MyApp> {
         name: "حافظه نامحدود",
         author: "کوین هرسلی",
         price: 95,
-        category: Category.top_selling,
+        category: Categoryz.top_selling,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/86186_36247_normal.jpg?width=200",
@@ -214,7 +228,7 @@ class _MyAppState extends State<MyApp> {
       name: "بخشنده",
       author: "لوئیس لوری",
       price: 37,
-      category: Category.favorite,
+      category: Categoryz.favorite,
       type: Type.soundBooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/78598_85402_normal.jpg?width=200",
@@ -224,7 +238,7 @@ class _MyAppState extends State<MyApp> {
       name: "1984",
       author: "جورج اورول",
       price: 24,
-      category: Category.top_selling,
+      category: Categoryz.top_selling,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/99473_44720_normal.jpg?width=200",
@@ -237,37 +251,55 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: "Ketabkhan",
       theme: ThemeData(
-        primaryColor: const Color.fromRGBO(11, 94, 160, 1),
-        accentColor: const Color.fromRGBO(63, 220, 255, 1),
-        canvasColor: const Color.fromRGBO(221, 240, 255, 1),
-        fontFamily: "IranSans",
-        appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
-        textTheme: const TextTheme(
-            bodyLarge: TextStyle(color: Colors.white, fontSize: 20),
-            bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic),
-            bodySmall: TextStyle(color: Colors.white, fontSize: 12),
-          headlineSmall: TextStyle(color: Colors.black, fontSize: 24),
-        titleSmall: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16),
-          titleMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 20),
+          primaryColor: const Color.fromRGBO(11, 94, 160, 1),
+          accentColor: const Color.fromRGBO(63, 220, 255, 1),
+          canvasColor: const Color.fromRGBO(221, 240, 255, 1),
+          fontFamily: "IranSansNum",
+          brightness: Brightness.light,
+          appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(fontSize: 20, color: Colors.white,),
+            bodyMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16, textBaseline: TextBaseline.alphabetic),
+            bodySmall: TextStyle(color: Colors.black, fontSize: 16),
+              headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
+              headlineSmall: TextStyle(color: Colors.black, fontSize: 24),
+              headlineMedium: TextStyle(color: Colors.black, fontSize: 23, fontFamily: "IranSans",),
+            titleSmall: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 18),
+            titleMedium: TextStyle(color: Colors.white, fontSize: 20,),
+            titleLarge: TextStyle(color: Colors.black, fontSize: 20),
 
-        ),
-        buttonTheme: const ButtonThemeData(buttonColor: Color.fromRGBO(11, 94, 160, 1),)
+          ),
+        buttonColor: const Color.fromRGBO(11, 94, 160, 1),
       ),
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData.dark().copyWith(
+        textTheme: const TextTheme(
+        bodyLarge: TextStyle(fontSize: 24),
+        bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic, fontFamily: "IranSans"),
+        bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
+        headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
+        headlineMedium: TextStyle(color: Colors.white, fontSize: 23, fontFamily: "IranSans"),
+        titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSans" ),
+        titleMedium: TextStyle(color: Colors.black, fontSize: 20, fontFamily: "IranSans"),
+            titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans")
+        ),
+        buttonColor: Colors.white,
+      ),
       themeMode: _themeMode,
 
 
 
-      initialRoute: UserScreen.routeName,
+      // initialRoute: '/',
       routes: {
-        LoginScreen.routeName: (context) => LoginScreen(),
-        RegisterScreen.routeName: (context) => RegisterScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(dummy_books),
+        '/': (context) => TabsScreen(_themeMode, emma, dummy_books,),
+        LoginScreen.routeName: (context) => LoginScreen(_themeMode),
+        RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
+        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode),
         DetailsScreen.routeName: (context) => DetailsScreen(),
-        LibraryScreen.routeName: (context) => LibraryScreen(tempList),
-        ShopScreen.routeName: (context) => ShopScreen(dummy_books),
+        LibraryScreen.routeName: (context) => LibraryScreen(dummy_books),
+        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode),
         UserScreen.routeName: (context) => UserScreen(emma),
       },
+
     );
   }
 }

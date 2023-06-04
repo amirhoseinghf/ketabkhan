@@ -5,6 +5,10 @@ import '../models/User.dart';
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/register";
 
+  ThemeMode themeMode;
+
+  RegisterScreen(this.themeMode);
+
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -49,16 +53,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   Text(
                                     "ثبت نام",
                                     style: TextStyle(
-                                        fontSize: 30,
-                                        color: Theme.of(context).primaryColor),
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold,
+                                        color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.white : Theme.of(context).primaryColor,
+                                      fontFamily: "IranSans"
+                                    ),
                                   ),
                                   SizedBox(
                                     height: 30,
                                     width: 1,
-                                    child: Container(color: Theme.of(context).primaryColor),
+                                    child: Container(color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.white :Theme.of(context).primaryColor),
                                   ),
-                                  SvgPicture.asset("assets/images/logofinal2.svg",
-                                      height: 50),
+                                  widget.themeMode == ThemeMode.light || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.light) ? SvgPicture.asset("assets/images/logofinal2.svg",
+                                    height: 50,
+                                  ) : SvgPicture.asset("assets/images/logofinal1.svg", height: 50,)
                                 ],
                               ),
 
@@ -151,11 +159,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ElevatedButton(
                                         onPressed: () {if(_formKey.currentState.validate()) {
                                           print("Done");
+                                          Navigator.pushNamed(context, '/home');
                                         }},
-                                        child: Text("ثبت نام", style: TextStyle(fontSize: 17),),
+                                        child: Text("ثبت نام", style: TextStyle(fontSize: 17, fontFamily: "IranSans", color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.black : Colors.white),),
                                         style: ButtonStyle(
                                           backgroundColor: MaterialStateProperty.all(
-                                              Theme.of(context).primaryColor),
+                                              widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.white :Theme.of(context).primaryColor),
                                         ),
                                       ),
                                     ),

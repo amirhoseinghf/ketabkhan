@@ -1,11 +1,13 @@
+
 import 'package:flutter/material.dart';
 import '../widgets/BookWidget.dart';
 import '../models/Book.dart';
 
 class HomeEbooksScreen extends StatelessWidget {
   List<Book> dummy;
+  ThemeMode themeMode;
 
-  HomeEbooksScreen(this.dummy);
+  HomeEbooksScreen(this.dummy, this.themeMode);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class HomeEbooksScreen extends StatelessWidget {
       return Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor.withOpacity(0.8),
+            color: Theme.of(context).primaryColor.withOpacity(0.9),
             borderRadius: BorderRadius.circular(15)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,7 +27,7 @@ class HomeEbooksScreen extends StatelessWidget {
             ),
             Text(
               title,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: TextStyle(fontFamily: "IranSans", fontSize: 18, color: Colors.white),
             )
           ],
         ),
@@ -33,9 +35,9 @@ class HomeEbooksScreen extends StatelessWidget {
     }
 
     List<Book> ebooksList = dummy.where((element) => element.type == Type.ebooks).toList();
-    List<Book> favoritesList = ebooksList.where((element) => element.category == Category.favorite).toList();
-    List<Book> newList = ebooksList.where((element) => element.category == Category.new_release).toList();
-    List<Book> topSellingList = ebooksList.where((element) => element.category == Category.top_selling).toList();
+    List<Book> favoritesList = ebooksList.where((element) => element.category == Categoryz.favorite).toList();
+    List<Book> newList = ebooksList.where((element) => element.category == Categoryz.new_release).toList();
+    List<Book> topSellingList = ebooksList.where((element) => element.category == Categoryz.top_selling).toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -48,7 +50,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: favoritesList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: favoritesList[index].name, author: favoritesList[index].author, imageUrl: favoritesList[index].imageUrl, price: favoritesList[index].price),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: favoritesList[index].name, author: favoritesList[index].author, imageUrl: favoritesList[index].imageUrl, price: favoritesList[index].price, themeMode: themeMode),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -58,7 +60,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: newList[index].name, author: newList[index].author, imageUrl: newList[index].imageUrl,price: newList[index].price,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: newList[index].name, author: newList[index].author, imageUrl: newList[index].imageUrl,price: newList[index].price, themeMode: themeMode,),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -68,7 +70,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: topSellingList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: topSellingList[index].name, author: topSellingList[index].author, imageUrl: topSellingList[index].imageUrl, price: topSellingList[index].price),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: topSellingList[index].name, author: topSellingList[index].author, imageUrl: topSellingList[index].imageUrl, price: topSellingList[index].price, themeMode: themeMode,),);},
                 ),
               ),
             ],

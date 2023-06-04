@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-enum Category {
+enum Categoryz {
   favorite,
   new_release,
   top_selling,
@@ -23,7 +23,7 @@ class Book {
   final String author;
   final Genre genre;
   final int price;
-  final Category category;
+  final Categoryz category;
   final String imageUrl;
   final Type type;
   bool isReadingNow;

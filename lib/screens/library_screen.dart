@@ -42,10 +42,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
               }
             },
             itemBuilder: (ctx) => <PopupMenuEntry<String>> [
-              PopupMenuItem(child: Text('فایل صوتی'), value: 'soundBook',),
-              PopupMenuItem(child: Text('کتاب الکترونیکی'), value: 'ebook',)
+              PopupMenuItem(child: Text('فایل صوتی', style: Theme.of(context).textTheme.titleSmall,), value: 'soundBook',),
+              PopupMenuItem(child: Text('کتاب الکترونیکی', style: Theme.of(context).textTheme.titleSmall,), value: 'ebook',)
             ],
-            initialValue: 'ebook',
+            initialValue: 'soundBook',
 
           ),
           actions: [
@@ -60,7 +60,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
             height: 27,
           ),
           centerTitle: true,
-          bottom: TabBar(tabs: [Tab(child: Text("کتاب های شما"),)],),
+          bottom: TabBar(tabs: [Tab(child: Text("کتاب های شما", style: TextStyle(fontFamily: "IranSans"),),)],),
         ),
         body: GridView(
           padding: const EdgeInsets.all(20),
