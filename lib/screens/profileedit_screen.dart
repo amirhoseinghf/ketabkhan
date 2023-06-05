@@ -90,6 +90,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.name = result;
                     },
+                    initialValue: widget.user.name,
                   ),
                   SizedBox(
                     height: 15,
@@ -106,6 +107,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.familyName = result;
                     },
+                    initialValue: widget.user.familyName,
                   ),
                   SizedBox(
                     height: 15,
@@ -122,6 +124,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.profileImageUrl = result;
                     },
+                    initialValue: widget.user.profileImageUrl,
                   ),
                   SizedBox(
                     height: 30,
@@ -133,6 +136,30 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               setState(() {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.done_all_rounded,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            "اطلاعات شما با موفقیت ذخیره شد.",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontFamily: "IranSansNum"),
+                                          ),
+                                        ],
+                                      )),
+                                  backgroundColor: Colors.green,
+                                ));
                               });
                             }
                           },

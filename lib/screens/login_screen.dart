@@ -5,21 +5,22 @@ import './register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = "/login";
-
+  String email = "";
+  String password = "";
+  final _formKey = GlobalKey<FormState>();
   ThemeMode themeMode;
 
   LoginScreen(this.themeMode);
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Directionality(
           textDirection: TextDirection.rtl,
           child: Center(
             child: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 height: deviceSize.height * 0.53,
                 width: deviceSize.width * 0.8,
                 child: SingleChildScrollView(
@@ -28,10 +29,10 @@ class LoginScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
                     child: Container(
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           // Header
@@ -76,69 +77,103 @@ class LoginScreen extends StatelessWidget {
                             ],
                           ),
 
-                          SizedBox(
+                          const SizedBox(
                             height: 35,
                           ),
                           Form(
+                            key: _formKey,
                             child: Column(
                               children: [
                                 TextFormField(
                                   decoration: InputDecoration(
-                                      label: Text("ایمیل"),
-                                      labelStyle: TextStyle(fontSize: 20),
+                                      label: const Text("ایمیل"),
+                                      labelStyle: const TextStyle(fontSize: 20),
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      suffixIcon: Icon(Icons.mail)),
+                                      suffixIcon: const Icon(Icons.mail)),
                                   keyboardType: TextInputType.emailAddress,
+                                  validator: (result) {
+                                    if (result.isEmpty) {
+                                      return "لطفا ایمیل خود را وارد کنید.";
+                                    }
+                                  },
+                                  style: Theme.of(context).textTheme.headlineSmall,
+                                  onChanged: (result) {
+                                    email = result;
+                                  },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 TextFormField(
                                   obscureText: true,
                                   decoration: InputDecoration(
-                                      label: Text("رمز عبور"),
-                                      labelStyle: TextStyle(fontSize: 20),
+                                      label: const Text("رمز عبور"),
+                                      labelStyle: const TextStyle(fontSize: 20),
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
-                                      suffixIcon: Icon(Icons.key)),
+                                      suffixIcon: const Icon(Icons.key)),
+                                  validator: (result) {
+                                    if (result.isEmpty) {
+                                      return "لطفا رمز عبور خود را وارد کنید.";
+                                    }
+                                  },
+                                  onChanged: (result) {
+                                    password = result;
+                                  },
+                                  style: Theme.of(context).textTheme.headlineSmall,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
-                                    onPressed: () {Navigator.pushNamed(context, '/main');},
-                                    child: Text(
-                                      "ورود",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: "IranSans",
-                                          color: themeMode == ThemeMode.light ||
-                                                  (themeMode ==
-                                                          ThemeMode.system &&
-                                                      ThemeMode.system ==
-                                                          ThemeMode.light)
-                                              ? Colors.white
-                                              : Colors.black),
-                                    ),
+                                    onPressed: () {
+                                      if(_formKey.currentState.validate()) {
+                                        if(email == MyApp.of(context).appUser.email && password == MyApp.of(context).appUser.password) {
+                                          Navigator.pushNamed(context, '/main');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(SnackBar(
+                                            content: Directionality(
+                                                textDirection: TextDirection.rtl,
+                                                child: Row(
+                                                  children: const [
+                                                    Icon(
+                                                      Icons.done_all_rounded,
+                                                      color: Colors.white,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      "با موفقیت وارد شدید.",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 20,
+                                                          fontFamily: "IranSansNum"),
+                                                    ),
+                                                  ],
+                                                )),
+                                            backgroundColor: Colors.green,
+                                            duration: const Duration(seconds: 3),
+                                          ));
+                                        }
+                                      }
+                                    },
                                     style: ButtonStyle(
                                       backgroundColor:
-                                          MaterialStateProperty.all(themeMode ==
-                                                      ThemeMode.light ||
-                                                  (themeMode ==
-                                                          ThemeMode.system &&
-                                                      ThemeMode.system ==
-                                                          ThemeMode.light)
-                                              ? Theme.of(context).primaryColor
-                                              : Colors.white),
+                                          MaterialStateProperty.all(Theme.of(context).buttonColor),
+                                    ),
+                                    child: Text(
+                                      "ورود",
+                                      style: Theme.of(context).textTheme.titleMedium
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 TextButton(
@@ -148,16 +183,7 @@ class LoginScreen extends StatelessWidget {
                                     },
                                     child: Text(
                                       "ثبت نام در کتابخوان",
-                                      style: TextStyle(
-                                          fontSize: 17,
-                                          fontFamily: "IranSans",
-                                          color: themeMode == ThemeMode.light ||
-                                                  (themeMode ==
-                                                          ThemeMode.system &&
-                                                      ThemeMode.system ==
-                                                          ThemeMode.light)
-                                              ? Theme.of(context).primaryColor
-                                              : Colors.white),
+                                      style: Theme.of(context).textTheme.bodyMedium,
                                     ))
                               ],
                             ),

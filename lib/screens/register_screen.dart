@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../models/User.dart';
 import 'package:ketabkhan/main.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -8,7 +7,7 @@ class RegisterScreen extends StatefulWidget {
 
   ThemeMode themeMode;
 
-  RegisterScreen(this.themeMode);
+  RegisterScreen(this.themeMode, {Key key}) : super(key: key);
 
 
   @override
@@ -21,7 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String password;
 
 
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
 
   @override
@@ -32,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           body: Directionality(
               textDirection: TextDirection.rtl,
               child: Center(
-                child: Container(
+                child: SizedBox(
                     height: deviceSize.height * 0.6,
                     width: deviceSize.width * 0.8,
                     child: Card(
@@ -41,10 +40,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       child: SingleChildScrollView(
                         child: Container(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           child: Column(
                             children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 18,
                               ),
                               // Header
@@ -71,7 +70,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ],
                               ),
 
-                              SizedBox(
+                              const SizedBox(
                                 height: 35,
                               ),
 
@@ -83,22 +82,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     // Email Field
                                     TextFormField(
                                       decoration: InputDecoration(
-                                          label: Text("ایمیل"),
-                                          labelStyle: TextStyle(fontSize: 20),
+                                          label: const Text("ایمیل"),
+                                          labelStyle: const TextStyle(fontSize: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
-                                          suffixIcon: Icon(Icons.mail)),
+                                          suffixIcon: const Icon(Icons.mail)),
                                       keyboardType: TextInputType.emailAddress,
                                       onChanged: (mail) => email = mail,
                                       validator: (emailAddress) {
-                                        if (emailAddress.length == 0) return "مقدار ایمیل نمی تواند خالی باشد";
-                                        else if (!emailAddress.contains("@") || !emailAddress.contains(".")) return "ایمیل شما نامعتبر می باشد";
+                                        if (emailAddress.isEmpty) {
+                                          return "مقدار ایمیل نمی تواند خالی باشد";
+                                        } else if (!emailAddress.contains("@") || !emailAddress.contains(".")) {
+                                          return "ایمیل شما نامعتبر می باشد";
+                                        }
                                       },
                                       style: Theme.of(context).textTheme.headlineSmall,
 
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
 
@@ -106,17 +108,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     // Username Field
                                     TextFormField(
                                       decoration: InputDecoration(
-                                          label: Text("نام کاربری"),
-                                          labelStyle: TextStyle(fontSize: 20),
+                                          label: const Text("نام کاربری"),
+                                          labelStyle: const TextStyle(fontSize: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
-                                          suffixIcon: Icon(Icons.person)),
+                                          suffixIcon: const Icon(Icons.person)),
                                       keyboardType: TextInputType.emailAddress,
                                       onChanged: (user) => userName = user,
                                       style: Theme.of(context).textTheme.headlineSmall,
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
 
@@ -125,21 +127,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextFormField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          label: Text("رمز عبور"),
-                                          labelStyle: TextStyle(fontSize: 20),
+                                          label: const Text("رمز عبور"),
+                                          labelStyle: const TextStyle(fontSize: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
-                                          suffixIcon: Icon(Icons.key)),
+                                          suffixIcon: const Icon(Icons.key)),
                                       validator: (password) {
-                                        if (password.length < 8) return "رمز عبور شما باید حداقل دارای 8 کاراکتر باشد.";
-                                        else if (password.contains(userName)) return "رمز عبور شما نمی تواند شامل نام کاربری شما باشد.";
+                                        if (password.length < 8) {
+                                          return "رمز عبور شما باید حداقل دارای 8 کاراکتر باشد.";
+                                        } else if (password.contains(userName)) {
+                                          return "رمز عبور شما نمی تواند شامل نام کاربری شما باشد.";
+                                        }
                                       },
                                       style: Theme.of(context).textTheme.headlineSmall,
                                       onChanged: (pass) => password = pass,
                                     ),
 
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
 
@@ -147,35 +152,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextFormField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          label: Text("رمز عبور"),
-                                          labelStyle: TextStyle(fontSize: 20),
+                                          label: const Text("رمز عبور"),
+                                          labelStyle: const TextStyle(fontSize: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
-                                          suffixIcon: Icon(Icons.key)),
+                                          suffixIcon: const Icon(Icons.key)),
                                       validator: (value) {if (value != password) return "رمز عبور شما یکسان نیست";},
                                       style: Theme.of(context).textTheme.headlineSmall,
                                     ),
 
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
 
                                     // Sign up button
-                                    Container(
+                                    SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
                                         onPressed: () {if(_formKey.currentState.validate()) {
-                                          print("Done");
                                           MyApp.of(context).appUser.userName = userName;
                                           MyApp.of(context).appUser.email = email;
                                           MyApp.of(context).appUser.password = password;
-                                          Navigator.pushNamed(context, '/main');
+                                          Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
                                         }},
-                                        child: Text("ثبت نام", style: TextStyle(fontSize: 17, fontFamily: "IranSans", color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.black : Colors.white),),
                                         style: ButtonStyle(
                                           backgroundColor: MaterialStateProperty.all(
                                               widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.white :Theme.of(context).primaryColor),
                                         ),
+                                        child: Text("ثبت نام", style: TextStyle(fontSize: 17, fontFamily: "IranSans", color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.black : Colors.white),),
                                       ),
                                     ),
 

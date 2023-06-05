@@ -236,8 +236,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 50,
                   child: OutlinedButton(
                     onPressed: () {
-                      if(widget.user.books.contains(widget.book))  {                     widget.book.isReadingNow = true;
-                      widget.book.isReadingNow = true;} else {
+                      if(widget.user.books.contains(widget.book))  {setState(() {
+                        widget.book.isReadingNow = true;
+                      });} else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(
                           content: Directionality(

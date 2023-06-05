@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import './screens/tabs_screen.dart';
 import './screens/shop_screen.dart';
@@ -13,20 +12,21 @@ import './screens/library_screen.dart';
 import './screens/payment_screen.dart';
 import './screens/profileedit_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState();
 
 
-  static _MyAppState of(BuildContext context) => context.findAncestorStateOfType<_MyAppState>();
+  static MyAppState of(BuildContext context) => context.findAncestorStateOfType<MyAppState>();
 
 
 }
 
-class _MyAppState extends State<MyApp> {
+class MyAppState extends State<MyApp> {
 
   Brightness brigh = Brightness.light;
   ThemeMode _themeMode = ThemeMode.light;
@@ -45,9 +45,9 @@ class _MyAppState extends State<MyApp> {
     return _themeMode;
   }
 
-  User appUser = User(email: "", userName: "", password: "");
+  User appUser = User(email: "admin", userName: "admin", password: "admin");
 
-  User emma = User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
+  // User emma = User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
 
   List<Book> dummy_books = [
     Book(
@@ -284,7 +284,7 @@ class _MyAppState extends State<MyApp> {
         headlineMedium: TextStyle(color: Colors.white, fontSize: 23, fontFamily: "IranSans"),
             headlineSmall: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "IranSansNum"),
         titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSansNum" ),
-        titleMedium: TextStyle(color: Colors.black, fontSize: 20, fontFamily: "IranSans"),
+        titleMedium: TextStyle(color: Colors.black, fontSize: 19, fontFamily: "IranSans"),
             titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans")
         ),
         buttonColor: Colors.white,
@@ -295,15 +295,15 @@ class _MyAppState extends State<MyApp> {
 
       initialRoute: LoginScreen.routeName,
       routes: {
-        TabsScreen.routeName: (context) => TabsScreen(_themeMode, appUser, dummy_books, emma.books),
+        TabsScreen.routeName: (context) => TabsScreen(_themeMode, appUser, dummy_books, appUser.books),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
-        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, emma),
+        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, appUser),
         DetailsScreen.routeName: (context) => DetailsScreen(),
-        LibraryScreen.routeName: (context) => LibraryScreen(emma.books, emma),
-        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode, emma),
+        LibraryScreen.routeName: (context) => LibraryScreen(appUser.books, appUser),
+        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode, appUser),
         UserScreen.routeName: (context) => UserScreen(appUser),
-        PaymentScreen.routeName: (context) => PaymentScreen(emma),
+        PaymentScreen.routeName: (context) => PaymentScreen(appUser),
         ProfileEditScreen.routeName: (context) => ProfileEditScreen(appUser),
       },
 
