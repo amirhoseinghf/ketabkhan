@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../models/Book.dart';
+import '../models/User.dart';
 import '../widgets/BookWidget.dart';
 import 'details_screen.dart';
 
@@ -10,8 +11,9 @@ class ShopScreen extends StatefulWidget {
 
   final List<Book> bookList;
   ThemeMode themeMode;
+  User user;
 
-  ShopScreen(this.bookList, this.themeMode);
+  ShopScreen(this.bookList, this.themeMode, this.user);
 
   @override
   State<ShopScreen> createState() => _ShopScreenState();
@@ -156,18 +158,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     DetailsScreen(
-                                                      imageUrl:
-                                                          filteredBooks[index]
-                                                              .imageUrl,
-                                                      author:
-                                                          filteredBooks[index]
-                                                              .author,
-                                                      price:
-                                                          filteredBooks[index]
-                                                              .price,
-                                                      bookName:
-                                                          filteredBooks[index]
-                                                              .name,
+                                                      book: filteredBooks[index], user: widget.user,
                                                     )));
                                       },
                                     ),
@@ -282,10 +273,8 @@ class _ShopScreenState extends State<ShopScreen> {
             itemBuilder: (ctx, i) {
               widget.bookList.shuffle();
               return BookWidget(
-                name: widget.bookList[i].name,
-                author: widget.bookList[i].author,
-                imageUrl: widget.bookList[i].imageUrl,
-                price: widget.bookList[i].price);},
+              user: widget.user,
+              book: widget.bookList[i],);},
 
           ),
         ),

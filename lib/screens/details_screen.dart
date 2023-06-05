@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../models/Book.dart';
 import '../models/User.dart';
 import '../widgets/LinProg.dart';
 import '../widgets/BookWidget.dart';
 class DetailsScreen extends StatefulWidget {
   static const routeName = '/details';
 
-  final String imageUrl;
-  String bookName;
-  String author;
-  int price;
-  ThemeMode themeMode;
   User user;
+  Book book;
 
   DetailsScreen(
-      {@required this.imageUrl, this.bookName, this.author, this.price, this.themeMode, this.user});
+      {this.user, this.book});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -41,7 +38,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     var deviceSize = MediaQuery.of(context).size;
 
-    bool isLightMode = widget.themeMode == ThemeMode.light || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.light);
 
 
     double addAndReturnSum(double rating) {
@@ -93,20 +89,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    widget.imageUrl,
+                    widget.book.imageUrl,
                     fit: BoxFit.cover,
                   ))),
           SizedBox(
             height: 20,
           ),
           Text(
-            widget.bookName,
+            widget.book.name,
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           SizedBox(
             height: 5,
           ),
-          Text(widget.author, style: Theme.of(context).textTheme.titleSmall,)
+          Text(widget.book.author, style: Theme.of(context).textTheme.titleSmall,)
         ],
       );
     }
@@ -159,7 +155,64 @@ class _DetailsScreenState extends State<DetailsScreen> {
           Container(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  if (widget.user.credit >= widget.book.price) {
+                    widget.user.books.add(widget.book);
+                    widget.user.credit -= widget.book.price;
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(
+                      content: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.done_all_rounded,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "کتاب مورد نظر خریداری شد!",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: "IranSansNum"),
+                              ),
+                            ],
+                          )),
+                      backgroundColor: Colors.green,
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(
+                      content: Directionality(
+                          textDirection: TextDirection.rtl,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.warning,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "اعتبار شما کافی نیست!",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: "IranSansNum"),
+                              ),
+                            ],
+                          )),
+                      backgroundColor: Colors.red,
+                    ));
+                  }
+                });
+
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Theme.of(context).buttonColor,
                 shape: RoundedRectangleBorder(
@@ -167,7 +220,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 padding: EdgeInsets.all(20),
               ),
               child: Text(
-                " خرید | ${widget.price} هزار تومان",
+               widget.user.books.contains(widget.book) ? "شما این کتاب را خریداری کرده اید" : " خرید | ${widget.book.price} هزار تومان",
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -182,9 +235,37 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   width: deviceSize.width * 0.4,
                   height: 50,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(widget.user.books.contains(widget.book))  {                     widget.book.isReadingNow = true;
+                      widget.book.isReadingNow = true;} else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(SnackBar(
+                          content: Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.motion_photos_on_outlined,
+                                    color: Colors.black,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "باید اول کتاب را خریداری کنید",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontFamily: "IranSansNum"),
+                                  ),
+                                ],
+                              )),
+                          backgroundColor: Colors.yellow,
+                        ));
+                      }
+                    },
                     child: Text(
-                      "نمونه",
+                     widget.book.isReadingNow ? "در حال خواندن" : "خواندن",
                       style: Theme.of(context).textTheme.bodyMedium
                     ),
                     style: OutlinedButton.styleFrom(
@@ -244,7 +325,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
-                    widget.author,
+                    widget.book.author,
                     style: TextStyle(color: Theme.of(context).accentColor),
                   ),
                 ),
@@ -255,7 +336,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
                   ),
                   trailing: Text(
-                    "${widget.price} هزار تومان",
+                    "${widget.book.price} هزار تومان",
                     style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSansNum"),
                   ),
                 ),

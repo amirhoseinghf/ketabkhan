@@ -13,8 +13,8 @@ class TabsScreen extends StatefulWidget {
   ThemeMode themeMode;
   User user;
   List<Book> bookList;
-
-  TabsScreen(this.themeMode, this.user, this.bookList);
+  List<Book> myBooks;
+  TabsScreen(this.themeMode, this.user, this.bookList, this.myBooks);
 
 
   @override
@@ -36,8 +36,8 @@ class _TabsScreenState extends State<TabsScreen> {
     super.initState();
     _pages = [
       {'page': HomeScreen(widget.bookList, widget.themeMode, widget.user), 'title': 'Home'},
-      {'page': ShopScreen(widget.bookList, widget.themeMode), 'title': 'Shop'},
-      {'page': LibraryScreen(widget.bookList), 'title': 'Library'},
+      {'page': ShopScreen(widget.bookList, widget.themeMode, widget.user), 'title': 'Shop'},
+      {'page': LibraryScreen(widget.myBooks, widget.user), 'title': 'Library'},
       {'page': UserScreen(widget.user), 'title': 'User'}
     ];
   }
@@ -45,19 +45,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   shape: const RoundedRectangleBorder(
-      //       borderRadius: BorderRadius.only(
-      //           bottomLeft: Radius.circular(20),
-      //           bottomRight: Radius.circular(20))),
-      //   automaticallyImplyLeading: false,
-      //   backgroundColor: Theme.of(context).primaryColor,
-      //   title: SvgPicture.asset(
-      //     'assets/images/ketabkhan.svg',
-      //     height: 27,
-      //   ),
-      //   centerTitle: true,
-      // ),
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(canvasColor: Theme.of(context).primaryColor),

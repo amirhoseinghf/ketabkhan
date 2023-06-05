@@ -37,28 +37,44 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           children: <Widget>[
             Container(
-              height: deviceSize.height * 0.4,
+              height: deviceSize.height * 0.42,
               color: Theme.of(context).primaryColor,
               child: Center(
                 child: isReadingBooks.length == 0
-                    ? Text(
-                        '!هنوز کتاب درحال خوندنی نداری',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      )
-                    : Center(
-                      child:
-                            Container(
-                              height: deviceSize.height * 0.4,
-                              margin: EdgeInsets.only(top: 12),
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                  itemCount: isReadingBooks.length,
-                                  shrinkWrap: true,
-                                  itemBuilder: (ctx, i) {
-                                    return CurrentReadingBookWidget(isReadingBooks[i].name, isReadingBooks[i].imageUrl);
-                                  }),
+                    ? Column(
+                      children: [
+                        SizedBox(height: 160,),
+                        Text(
+                            ' !هنوز کتاب درحال خوندنی نداری',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        SizedBox(height: 20,),
+                        Text("🥲", style: TextStyle(fontSize: 35),)
+                      ],
+                    )
+                    : Column(
+                      children: [
+                        SizedBox(height: 46,),
+                        Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: Text("کتاب های در حال خواندن:", style: TextStyle(color: Colors.white),)),
+
+                        Center(
+                          child:
+                                Container(
+                                  height: deviceSize.height * 0.33,
+                                  // margin: EdgeInsets.only(top: 12),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                      itemCount: isReadingBooks.length,
+                                      shrinkWrap: true,
+                                      itemBuilder: (ctx, i) {
+                                        return CurrentReadingBookWidget(isReadingBooks[i].name, isReadingBooks[i].imageUrl);
+                                      }),
+                                ),
                             ),
-                        ),
+                      ],
+                    ),
                     ),
               ),
             Container(

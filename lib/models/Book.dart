@@ -26,7 +26,7 @@ class Book {
   final Categoryz category;
   final String imageUrl;
   final Type type;
-  bool isReadingNow;
+  bool isReadingNow = false;
 
   Book(
       {@required this.id,
@@ -35,7 +35,7 @@ class Book {
       @required this.category,
       @required this.type,
       @required this.imageUrl,
-      this.isReadingNow,
+      this.isReadingNow = false,
       this.author,
       this.genre});
 }

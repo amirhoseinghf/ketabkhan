@@ -97,7 +97,7 @@ class _MyAppState extends State<MyApp> {
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/86186_36247_normal.jpg?width=200",
-        isReadingNow: true),
+    ),
     Book(
       id: "A6",
       name: "بخشنده",
@@ -274,7 +274,7 @@ class _MyAppState extends State<MyApp> {
       ),
       darkTheme: ThemeData.dark().copyWith(
         textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontSize: 24),
+        bodyLarge: TextStyle(fontSize: 24, color: Colors.white),
         bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic, fontFamily: "IranSans"),
         bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
         headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
@@ -292,13 +292,13 @@ class _MyAppState extends State<MyApp> {
 
       // initialRoute: '/',
       routes: {
-        '/': (context) => TabsScreen(_themeMode, emma, dummy_books,),
+        '/': (context) => TabsScreen(_themeMode, emma, dummy_books, emma.books),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
         HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, emma),
         DetailsScreen.routeName: (context) => DetailsScreen(),
-        LibraryScreen.routeName: (context) => LibraryScreen(dummy_books),
-        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode),
+        LibraryScreen.routeName: (context) => LibraryScreen(emma.books, emma),
+        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode, emma),
         UserScreen.routeName: (context) => UserScreen(emma),
         PaymentScreen.routeName: (context) => PaymentScreen(emma),
       },

@@ -10,7 +10,7 @@ class User {
   String profileImageUrl;
   double credit;
   String password;
-  List<Book> books;
+  List<Book> books = [];
 
   User(
       {@required this.email,

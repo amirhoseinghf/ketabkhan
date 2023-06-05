@@ -51,7 +51,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: favoritesList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: favoritesList[index].name, author: favoritesList[index].author, imageUrl: favoritesList[index].imageUrl, price: favoritesList[index].price, themeMode: themeMode, user: user,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user, book: favoritesList[index],),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -61,7 +61,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: newList[index].name, author: newList[index].author, imageUrl: newList[index].imageUrl,price: newList[index].price, themeMode: themeMode, user: user,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user,book: newList[index],),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -71,7 +71,7 @@ class HomeEbooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: topSellingList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: topSellingList[index].name, author: topSellingList[index].author, imageUrl: topSellingList[index].imageUrl, price: topSellingList[index].price, themeMode: themeMode, user: user,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user, book: topSellingList[index],),);},
                 ),
               ),
             ],

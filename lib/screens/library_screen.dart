@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../models/User.dart';
 import '../widgets/BookWidget.dart';
 import '../models/Book.dart';
 
 class LibraryScreen extends StatefulWidget {
   static const routeName = "/library";
   List<Book> bookList = [];
+  List<Book> finalList = [];
+  User user;
 
-  LibraryScreen(this.bookList);
+  LibraryScreen(this.bookList, this.user);
 
   @override
   State<LibraryScreen> createState() => _LibraryScreenState();
@@ -15,8 +18,11 @@ class LibraryScreen extends StatefulWidget {
 
 class _LibraryScreenState extends State<LibraryScreen> {
 
-  List<Book> finalList = [];
-  
+  @override
+  void initState() {
+    widget.finalList = widget.bookList;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     
@@ -34,10 +40,10 @@ class _LibraryScreenState extends State<LibraryScreen> {
             onSelected: (result) {
               switch (result) {
                 case 'soundBook': setState(() {
-                  finalList = soundBookList;
+                  widget.finalList = soundBookList;
                 });; break;
                 case 'ebook': setState(() {
-                  finalList = ebookList;
+                  widget.finalList = ebookList;
                 });; break;
               }
             },
@@ -45,7 +51,8 @@ class _LibraryScreenState extends State<LibraryScreen> {
               PopupMenuItem(child: Text('فایل صوتی', style: Theme.of(context).textTheme.titleSmall,), value: 'soundBook',),
               PopupMenuItem(child: Text('کتاب الکترونیکی', style: Theme.of(context).textTheme.titleSmall,), value: 'ebook',)
             ],
-            initialValue: 'soundBook',
+            initialValue: 'ebook',
+
 
           ),
           automaticallyImplyLeading: false,
@@ -59,7 +66,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
         ),
         body: GridView(
           padding: const EdgeInsets.all(20),
-          children: finalList.map((ctgItem) => BookWidget(name: ctgItem.name, author: ctgItem.author,imageUrl: ctgItem.imageUrl,price: ctgItem.price,)).toList(),
+          children: widget.finalList.map((ctgItem) => BookWidget(book: ctgItem, user: widget.user,)).toList(),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 2/3,

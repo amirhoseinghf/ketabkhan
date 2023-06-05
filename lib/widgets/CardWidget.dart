@@ -80,11 +80,11 @@ class _CardWidgetState extends State<CardWidget> {
           Positioned(
               bottom: 47,
               left: 48,
-              child: cardNumberToString.length < 16 ? Text(string, style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),) : Text("${cardNumberToString.substring(0,4)}  ${cardNumberToString.substring(4,8)}  ${cardNumberToString.substring(8,12)}  ${cardNumberToString.substring(12,16)}", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)),
+              child: cardNumberToString.length < 16 ? Text(string, style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: "IranSansNum"),) : Text("${cardNumberToString.substring(0,4)}  ${cardNumberToString.substring(4,8)}  ${cardNumberToString.substring(8,12)}  ${cardNumberToString.substring(12,16)}", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, fontFamily: "IranSansNum"),)),
           Positioned(
               bottom: 19,
               left: 20,
-              child: Text("CVV2 : ${widget.cvv2}", style: TextStyle(fontSize: 11.5, color: Colors.black, fontWeight: FontWeight.bold),))
+              child: Text("CVV2 : ${widget.cvv2}", style: TextStyle(fontSize: 11.5, color: Colors.black, fontWeight: FontWeight.bold, fontFamily: "IranSansNum"),))
         ],),
       ),
     );
