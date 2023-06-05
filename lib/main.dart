@@ -55,7 +55,7 @@ class MyAppState extends State<MyApp> {
         name: "کتابخانه نیمه‌ شب",
         author: "مت هیگ",
         price: 25,
-        category: Categoryz.new_release,
+        category: Categoryz.newRelease,
         genre: Genre.fiction,
         type: Type.ebooks,
         imageUrl:
@@ -65,7 +65,7 @@ class MyAppState extends State<MyApp> {
         name: "محکم در آغوشم بگیر",
         author: "سو آنسن",
         price: 39,
-        category: Categoryz.top_selling,
+        category: Categoryz.topSelling,
         genre: Genre.romance,
         type: Type.soundBooks,
         imageUrl:
@@ -85,7 +85,7 @@ class MyAppState extends State<MyApp> {
         name: "بی‌ حد و مرز",
         author: "جیمز کوییک",
         price: 79,
-        category: Categoryz.new_release,
+        category: Categoryz.newRelease,
         genre: Genre.horror,
         type: Type.soundBooks,
         imageUrl:
@@ -95,7 +95,7 @@ class MyAppState extends State<MyApp> {
         name: "حافظه نامحدود",
         author: "کوین هرسلی",
         price: 95,
-        category: Categoryz.top_selling,
+        category: Categoryz.topSelling,
         genre: Genre.history,
         type: Type.ebooks,
         imageUrl:
@@ -117,7 +117,7 @@ class MyAppState extends State<MyApp> {
       name: "1984",
       author: "جورج اورول",
       price: 24,
-      category: Categoryz.top_selling,
+      category: Categoryz.topSelling,
       genre: Genre.horror,
       type: Type.ebooks,
       imageUrl:
@@ -128,7 +128,7 @@ class MyAppState extends State<MyApp> {
       name: "مدیریت خود",
       author: "پیتر دراکر",
       price: 24,
-      category: Categoryz.new_release,
+      category: Categoryz.newRelease,
       genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
@@ -139,7 +139,7 @@ class MyAppState extends State<MyApp> {
       name: "ملت عشق",
       author: "الیف شافاک",
       price: 25,
-      category: Categoryz.top_selling,
+      category: Categoryz.topSelling,
       genre: Genre.history,
       type: Type.ebooks,
       imageUrl:
@@ -172,7 +172,7 @@ class MyAppState extends State<MyApp> {
       name: " زنی در کابین ۱۰",
       author: "روث ور",
       price: 34,
-      category: Categoryz.new_release,
+      category: Categoryz.newRelease,
       genre: Genre.romance,
       type: Type.ebooks,
       imageUrl:
@@ -186,7 +186,7 @@ class MyAppState extends State<MyApp> {
         name: "کتابخانه نیمه‌ شب",
         author: "مت هیگ",
         price: 25,
-        category: Categoryz.new_release,
+        category: Categoryz.newRelease,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/125302_50943_normal.jpg?width=200"),
@@ -195,7 +195,7 @@ class MyAppState extends State<MyApp> {
         name: "محکم در آغوشم بگیر",
         author: "سو آنسن",
         price: 39,
-        category: Categoryz.top_selling,
+        category: Categoryz.topSelling,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136671_72256_normal.jpg?width=200"),
@@ -213,7 +213,7 @@ class MyAppState extends State<MyApp> {
         name: "بی‌ حد و مرز",
         author: "جیمز کوییک",
         price: 79,
-        category: Categoryz.new_release,
+        category: Categoryz.newRelease,
         type: Type.soundBooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/136159_76305_normal.jpg?width=200"),
@@ -222,7 +222,7 @@ class MyAppState extends State<MyApp> {
         name: "حافظه نامحدود",
         author: "کوین هرسلی",
         price: 95,
-        category: Categoryz.top_selling,
+        category: Categoryz.topSelling,
         type: Type.ebooks,
         imageUrl:
         "https://newcdn.fidibo.com/images/books/86186_36247_normal.jpg?width=200",
@@ -242,7 +242,7 @@ class MyAppState extends State<MyApp> {
       name: "1984",
       author: "جورج اورول",
       price: 24,
-      category: Categoryz.top_selling,
+      category: Categoryz.topSelling,
       type: Type.ebooks,
       imageUrl:
       "https://newcdn.fidibo.com/images/books/99473_44720_normal.jpg?width=200",
@@ -277,7 +277,7 @@ class MyAppState extends State<MyApp> {
       ),
       darkTheme: ThemeData.dark().copyWith(
         textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontSize: 24, color: Colors.white),
+        bodyLarge: TextStyle(fontSize: 24, color: Colors.white, fontFamily: "IranSansNum"),
         bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic, fontFamily: "IranSans"),
         bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
         headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
@@ -295,13 +295,13 @@ class MyAppState extends State<MyApp> {
 
       initialRoute: LoginScreen.routeName,
       routes: {
-        TabsScreen.routeName: (context) => TabsScreen(_themeMode, appUser, dummy_books, appUser.books),
+        TabsScreen.routeName: (context) => TabsScreen(appUser, dummy_books, appUser.books),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
-        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, appUser),
+        HomeScreen.routeName: (context) => HomeScreen(dummy_books, appUser),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(appUser.books, appUser),
-        ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode, appUser),
+        ShopScreen.routeName: (context) => ShopScreen(dummy_books, appUser),
         UserScreen.routeName: (context) => UserScreen(appUser),
         PaymentScreen.routeName: (context) => PaymentScreen(appUser),
         ProfileEditScreen.routeName: (context) => ProfileEditScreen(appUser),

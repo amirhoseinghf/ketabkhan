@@ -6,7 +6,7 @@ class ProfileEditScreen extends StatefulWidget {
   static const routeName = "/edit";
   User user;
 
-  ProfileEditScreen(this.user);
+  ProfileEditScreen(this.user, {Key key}) : super(key: key);
 
   @override
   State<ProfileEditScreen> createState() => _ProfileEditScreenState();
@@ -24,7 +24,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     Widget userDetails() {
       return Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 35,
           ),
           Container(
@@ -32,7 +32,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(500)),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(500),
                   child: widget.user.profileImageUrl != null
@@ -51,7 +51,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
                           color: Colors.white,
                         ))),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -60,81 +60,84 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                 : widget.user.userName,
             style: Theme.of(context).textTheme.titleSmall,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
         ],
       );
     }
 
-    var _formKey = GlobalKey<FormState>();
+    var formKey = GlobalKey<FormState>();
 
     Widget formAndStuff() {
-      return Container(
+      return SizedBox(
         width: 300,
         child: Form(
-            key: _formKey,
+            key: formKey,
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: Column(
                 children: [
                   TextFormField(
                     decoration: InputDecoration(
-                        label: Text("نام"),
+                        label: const Text("نام"),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     style: Theme.of(context).textTheme.headlineSmall,
                     validator: (result) {
                       if (result.isEmpty) return "این فیلد نباید خالی باشد.";
+                      return null;
                     },
                     onChanged: (result) {
                       widget.user.name = result;
                     },
                     initialValue: widget.user.name,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                        label: Text("نام خانوادگی"),
+                        label: const Text("نام خانوادگی"),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     style: Theme.of(context).textTheme.headlineSmall,
                     validator: (result) {
                       if (result.isEmpty) return "این فیلد نباید خالی باشد.";
+                      return null;
                     },
                     onChanged: (result) {
                       widget.user.familyName = result;
                     },
                     initialValue: widget.user.familyName,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                        label: Text("آدرس تصویر"),
+                        label: const Text("آدرس تصویر"),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     style: Theme.of(context).textTheme.headlineSmall,
                     validator: (result) {
                       if (result.isEmpty) return "این فیلد نباید خالی باشد.";
+                      return null;
                     },
                     onChanged: (result) {
                       widget.user.profileImageUrl = result;
                     },
                     initialValue: widget.user.profileImageUrl,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  Container(
+                  SizedBox(
                       width: 300,
                       height: 40,
                       child: ElevatedButton(
                           onPressed: () {
-                            if (_formKey.currentState.validate()) {
+                            if (formKey.currentState.validate()) {
                               setState(() {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
@@ -184,14 +187,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           height: 27,
         ),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {Navigator.pop(context);}, icon: Icon(Icons.arrow_forward_ios_rounded))],
+        actions: [IconButton(onPressed: () {Navigator.pop(context);}, icon: const Icon(Icons.arrow_forward_ios_rounded))],
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
             children: [
               userDetails(),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               formAndStuff(),

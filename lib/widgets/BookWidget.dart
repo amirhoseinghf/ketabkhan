@@ -12,7 +12,7 @@ class BookWidget extends StatefulWidget {
   Book book;
 
 
-  BookWidget({this.user, this.book});
+  BookWidget({Key key, this.user, this.book}) : super(key: key);
 
   @override
   State<BookWidget> createState() => _BookWidgetState();
@@ -23,8 +23,8 @@ class _BookWidgetState extends State<BookWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: [BoxShadow(color: Colors.grey, blurRadius: 2)]),
+          margin: const EdgeInsets.all(10),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), boxShadow: const [BoxShadow(color: Colors.grey, blurRadius: 2)]),
           child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(widget.book.imageUrl, fit: BoxFit.cover,))),

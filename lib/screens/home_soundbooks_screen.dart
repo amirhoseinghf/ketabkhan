@@ -5,9 +5,8 @@ import '../models/Book.dart';
 
 class HomeSoundBooksScreen extends StatelessWidget {
   List<Book> dummy;
-  ThemeMode themeMode;
   User user;
-  HomeSoundBooksScreen(this.dummy, this.themeMode, this.user);
+  HomeSoundBooksScreen(this.dummy, this.user, {Key key}) : super(key: key);
 
 
 
@@ -16,20 +15,20 @@ class HomeSoundBooksScreen extends StatelessWidget {
 
     Widget headline(String title) {
       return Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Theme.of(context).primaryColor.withOpacity(0.9),
             borderRadius: BorderRadius.circular(15)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Icon(
+            const Icon(
               Icons.arrow_back_ios,
               color: Colors.white,
             ),
             Text(
               title,
-              style: TextStyle(fontFamily: "IranSans", fontSize: 18, color: Colors.white),
+              style: const TextStyle(fontFamily: "IranSans", fontSize: 18, color: Colors.white),
             )
           ],
         ),
@@ -38,41 +37,41 @@ class HomeSoundBooksScreen extends StatelessWidget {
 
     List<Book> soundBooks = dummy.where((element) => element.type == Type.soundBooks).toList();
     List<Book> favoritesList = soundBooks.where((element) => element.category == Categoryz.favorite).toList();
-    List<Book> newList = soundBooks.where((element) => element.category == Categoryz.new_release).toList();
-    List<Book> topSellingList = soundBooks.where((element) => element.category == Categoryz.top_selling).toList();
+    List<Book> newList = soundBooks.where((element) => element.category == Categoryz.newRelease).toList();
+    List<Book> topSellingList = soundBooks.where((element) => element.category == Categoryz.topSelling).toList();
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(30),
+          padding: const EdgeInsets.all(30),
           child: Column(
             children: [
               headline("علاقه‌مندی ها"),
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: favoritesList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user, book: favoritesList[index],),);},
+                  itemBuilder: (ctx, index) {return BookWidget(user: user, book: favoritesList[index],);},
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               headline("تازه ها"),
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user, book: newList[index],),);},
+                  itemBuilder: (ctx, index) {return BookWidget(user: user, book: newList[index],);},
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               headline("پرفروش ترین ها"),
-              Container(
+              SizedBox(
                 height: 200,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: topSellingList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(user: user, book: topSellingList[index],),);},
+                  itemBuilder: (ctx, index) {return BookWidget(user: user, book: topSellingList[index],);},
                 ),
               ),
             ],

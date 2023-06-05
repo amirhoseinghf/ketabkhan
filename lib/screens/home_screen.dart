@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
-import 'package:ketabkhan/widgets/BookWidget.dart';
 import 'package:ketabkhan/widgets/CurrentReadingBookWidget.dart';
 import '../models/User.dart';
 import './home_ebooks_screen.dart';
@@ -10,10 +9,9 @@ class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
 
   List<Book> dummy_books;
-  ThemeMode themeMode;
   User user;
 
-  HomeScreen(this.dummy_books, this.themeMode, this.user);
+  HomeScreen(this.dummy_books, this.user, {Key key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -40,28 +38,28 @@ class _HomeScreenState extends State<HomeScreen> {
               height: deviceSize.height * 0.42,
               color: Theme.of(context).primaryColor,
               child: Center(
-                child: isReadingBooks.length == 0
+                child: isReadingBooks.isEmpty
                     ? Column(
                       children: [
-                        SizedBox(height: 160,),
+                        const SizedBox(height: 160,),
                         Text(
                             ' !هنوز کتاب درحال خوندنی نداری',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
-                        SizedBox(height: 20,),
-                        Text("🥲", style: TextStyle(fontSize: 35),)
+                        const SizedBox(height: 20,),
+                        const Text("🥲", style: TextStyle(fontSize: 35),)
                       ],
                     )
                     : Column(
                       children: [
-                        SizedBox(height: 46,),
-                        Directionality(
+                        const SizedBox(height: 46,),
+                        const Directionality(
                             textDirection: TextDirection.rtl,
                             child: Text("کتاب های در حال خواندن:", style: TextStyle(color: Colors.white),)),
 
                         Center(
                           child:
-                                Container(
+                                SizedBox(
                                   height: deviceSize.height * 0.33,
                                   // margin: EdgeInsets.only(top: 12),
                                   child: ListView.builder(
@@ -77,11 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     ),
               ),
-            Container(
+            SizedBox(
               height: 80,
               child: AppBar(
                 backgroundColor: Theme.of(context).primaryColor,
-                bottom: TabBar(
+                bottom: const TabBar(
                   tabs: [
                     Tab(
                       child: Text("کتاب های الکترونیک", style: TextStyle(color: Colors.white, fontFamily: "IranSans"),),
@@ -98,11 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeEbooksScreen(widget.dummy_books, widget.themeMode, widget.user),
+                    child: HomeEbooksScreen(widget.dummy_books, widget.user),
                   ),
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeSoundBooksScreen(widget.dummy_books, widget.themeMode, widget.user),
+                    child: HomeSoundBooksScreen(widget.dummy_books, widget.user),
                   ),
                 ],
               ),

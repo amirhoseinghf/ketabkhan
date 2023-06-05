@@ -10,7 +10,7 @@ class LibraryScreen extends StatefulWidget {
   List<Book> finalList = [];
   User user;
 
-  LibraryScreen(this.bookList, this.user);
+  LibraryScreen(this.bookList, this.user, {Key key}) : super(key: key);
 
   @override
   State<LibraryScreen> createState() => _LibraryScreenState();
@@ -36,21 +36,21 @@ class _LibraryScreenState extends State<LibraryScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: PopupMenuButton(
-            icon: Icon(Icons.sort),
+            icon: const Icon(Icons.sort),
 
             onSelected: (result) {
               switch (result) {
                 case 'soundBook': setState(() {
                   widget.finalList = soundBookList;
-                });; break;
+                }); break;
                 case 'ebook': setState(() {
                   widget.finalList = ebookList;
-                });; break;
+                }); break;
               }
             },
             itemBuilder: (ctx) => <PopupMenuEntry<String>> [
-              PopupMenuItem(child: Text('فایل صوتی', style: Theme.of(context).textTheme.titleSmall,), value: 'soundBook',),
-              PopupMenuItem(child: Text('کتاب الکترونیکی', style: Theme.of(context).textTheme.titleSmall,), value: 'ebook',)
+              PopupMenuItem(value: 'soundBook',child: Text('فایل صوتی', style: Theme.of(context).textTheme.titleSmall,),),
+              PopupMenuItem(value: 'ebook',child: Text('کتاب الکترونیکی', style: Theme.of(context).textTheme.titleSmall,),)
             ],
             initialValue: 'ebook',
 
@@ -63,17 +63,17 @@ class _LibraryScreenState extends State<LibraryScreen> {
             height: 27,
           ),
           centerTitle: true,
-          bottom: TabBar(tabs: [Tab(child: Text("کتاب های شما", style: TextStyle(fontFamily: "IranSans"),),)],),
+          bottom: const TabBar(tabs: [Tab(child: Text("کتاب های شما", style: TextStyle(fontFamily: "IranSans"),),)],),
         ),
         body: GridView(
           padding: const EdgeInsets.all(20),
-          children: widget.finalList.map((ctgItem) => BookWidget(book: ctgItem, user: widget.user,)).toList(),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             childAspectRatio: 2/3,
             mainAxisSpacing: 20,
             crossAxisSpacing: 20,
           ),
+          children: widget.finalList.map((ctgItem) => BookWidget(book: ctgItem, user: widget.user,)).toList(),
         ),
       ),
     );

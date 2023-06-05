@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CurrentReadingBookWidget extends StatelessWidget {
-
   String name;
   String imageUrl;
 
-  CurrentReadingBookWidget(this.name, this.imageUrl);
+  CurrentReadingBookWidget(this.name, this.imageUrl, {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,26 +13,27 @@ class CurrentReadingBookWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.all(10),
-            height: 190,
-            decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 2)]),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(imageUrl, fit: BoxFit.cover,))),
-          SizedBox(height: 10,),
-          Text(name, style: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSans", fontWeight: FontWeight.bold),),
-          // SizedBox(height: 5,),
-          // Container(
-          //   decoration: BoxDecoration(border: Border.all(color: Colors.white), borderRadius: BorderRadius.circular(5)),
-          //   padding: EdgeInsets.all(3),
-          //   child: Row(
-          //     crossAxisAlignment: CrossAxisAlignment.center,
-          //     children: [
-          //     Icon(Icons.percent, size: Theme.of(context).textTheme.bodySmall.fontSize, color: Colors.white,),
-          //     SizedBox(width: 3,),
-          //     Text("24", style: TextStyle(fontFamily: "IranSansNum", fontSize: 13, fontWeight: FontWeight.bold, color: Colors.white)),
-          //   ],),
-          // ),
+              margin: const EdgeInsets.all(10),
+              height: 190,
+              decoration: const BoxDecoration(
+                  boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 2)]),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                  ))),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            name,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontFamily: "IranSans",
+                fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

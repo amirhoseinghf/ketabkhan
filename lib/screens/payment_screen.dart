@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/User.dart';
 import '../widgets/CardWidget.dart';
@@ -9,7 +8,7 @@ class PaymentScreen extends StatefulWidget {
   User user;
   String password;
 
-  PaymentScreen(this.user);
+  PaymentScreen(this.user, {Key key}) : super(key: key);
 
   @override
   State<PaymentScreen> createState() => _PaymentScreenState();
@@ -19,7 +18,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
   int cardNumber = 0;
   int cvv2 = 0;
   String dropDownMenuValue = "10 هزار تومان";
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,17 +36,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
           centerTitle: true,
           actions: [IconButton(
-              icon: Icon(Icons.arrow_forward_ios_rounded),
+              icon: const Icon(Icons.arrow_forward_ios_rounded),
           onPressed: () => Navigator.pop(context),)],
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               CardWidget(cardNumber, cvv2),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Directionality(
@@ -56,7 +55,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     key: _formKey,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 300,
                           height: 90,
                           child: TextFormField(
@@ -68,12 +67,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              suffixIcon: Icon(Icons.credit_card_rounded),
+                              suffixIcon: const Icon(Icons.credit_card_rounded),
                             ),
                             keyboardType: TextInputType.number,
-                            onChanged: (num) {
+                            onChanged: (val) {
                               setState(() {
-                                cardNumber = int.parse(num);
+                                cardNumber = int.parse(val);
                               });
                             },
                             maxLength: 16,
@@ -82,13 +81,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               if (value.length != 16) {
                                 return "مقدار وارد شده نامعتبر است.";
                               }
+                              return null;
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Container(
+                        SizedBox(
                           width: 300,
                           height: 90,
                           child: TextFormField(
@@ -100,12 +100,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              suffixIcon: Icon(Icons.password),
+                              suffixIcon: const Icon(Icons.password),
                             ),
                             keyboardType: TextInputType.number,
-                            onChanged: (num) {
+                            onChanged: (val) {
                               setState(() {
-                                cvv2 = int.parse(num);
+                                cvv2 = int.parse(val);
                               });
                             },
                             maxLength: 4,
@@ -114,13 +114,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               if (value.length != 4) {
                                 return "مقدار نامعتبر";
                               }
+                              return null;
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 12,
                         ),
-                        Container(
+                        SizedBox(
                           width: 300,
                           height: 90,
                           child: TextFormField(
@@ -133,10 +134,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              suffixIcon: Icon(Icons.key_rounded),
+                              suffixIcon: const Icon(Icons.key_rounded),
                             ),
                             keyboardType: TextInputType.number,
-                            onChanged: (num) {},
+                            onChanged: (val) {},
                             style: Theme.of(context).textTheme.headlineSmall,
                             validator: (value) {
                               if (value != "3070") {
@@ -145,7 +146,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   content: Directionality(
                                       textDirection: TextDirection.rtl,
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Icon(
                                             Icons.warning,
                                             color: Colors.white,
@@ -166,6 +167,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 ));
                                 return "";
                               }
+                              return null;
                             },
                           ),
                         ),
@@ -174,7 +176,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             Container(
                               width: 300,
                               height: 63,
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   border: Border.all(color: Colors.grey),
                                   borderRadius: BorderRadius.circular(15)),
@@ -187,8 +189,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   "40 هزار تومان",
                                 ].map((e) {
                                   return DropdownMenuItem(
-                                    child: Text(e),
                                     value: e,
+                                    child: Text(e),
                                   );
                                 }).toList(),
                                 onChanged: (String newValue) {
@@ -199,10 +201,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 style: Theme.of(context).textTheme.titleSmall,
                                 iconSize: 0.0,
                                 borderRadius: BorderRadius.circular(15),
-                                underline: SizedBox(),
+                                underline: const SizedBox(),
                               ),
                             ),
-                            Positioned(
+                            const Positioned(
                                 bottom: 20,
                                 right: 260,
                                 child: Icon(
@@ -210,10 +212,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 )),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
-                        Container(
+                        SizedBox(
                           width: 170,
                           height: 40,
                           child: ElevatedButton(
@@ -224,7 +226,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   content: Directionality(
                                       textDirection: TextDirection.rtl,
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Icon(
                                             Icons.done_all_rounded,
                                             color: Colors.white,
@@ -249,39 +251,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                       widget.user.credit += 10;
                                       Navigator.pop(context);
                                     }
-                                    ;                                    break;
+                                    break;
                                   case "20 هزار تومان":
                                     {
                                       widget.user.credit += 20;
                                       Navigator.pop(context);
                                     }
-                                    ;
                                     break;
                                   case "30 هزار تومان":
                                     {
                                       widget.user.credit += 30;
                                       Navigator.pop(context);
                                     }
-                                    ;
                                     break;
                                   case "40 هزار تومان":
                                     {
                                       widget.user.credit += 40;
                                       Navigator.pop(context);
                                     }
-                                    ;
                                     break;
                                 }
                               }
                             },
-                            child: Text(
-                              "افزایش اعتبار",
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Theme.of(context).buttonColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15))),
+                            child: Text(
+                              "افزایش اعتبار",
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
                         )
                       ],

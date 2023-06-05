@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 enum Categoryz {
   favorite,
-  new_release,
-  top_selling,
+  newRelease,
+  topSelling,
 }
 
 enum Type {

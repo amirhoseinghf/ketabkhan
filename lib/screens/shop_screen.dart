@@ -10,10 +10,9 @@ class ShopScreen extends StatefulWidget {
   static const routeName = '/shop';
 
   final List<Book> bookList;
-  ThemeMode themeMode;
   User user;
 
-  ShopScreen(this.bookList, this.themeMode, this.user);
+  ShopScreen(this.bookList, this.user, {Key key}) : super(key: key);
 
   @override
   State<ShopScreen> createState() => _ShopScreenState();
@@ -23,7 +22,7 @@ class _ShopScreenState extends State<ShopScreen> {
   final TextEditingController _searchController = TextEditingController();
   List<Book> filteredBooks = [];
   bool isLoading = false;
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   bool _showContainer = false;
 
   @override
@@ -61,9 +60,6 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-    var brightness = MediaQuery.of(context).platformBrightness;
-
-
 
     Widget searchBar() {
       return Center(
@@ -91,7 +87,7 @@ class _ShopScreenState extends State<ShopScreen> {
                     const SizedBox(
                       width: 13,
                     ),
-                    Container(
+                    SizedBox(
                         height: 30,
                         width: deviceSize.width * 0.6,
                         child: TextField(
@@ -138,7 +134,7 @@ class _ShopScreenState extends State<ShopScreen> {
                                 child: Column(
                                   children: [
                                     ListTile(
-                                      leading: Container(
+                                      leading: SizedBox(
                                           height: 40,
                                           child: Image.network(
                                             filteredBooks[index].imageUrl,
@@ -171,7 +167,7 @@ class _ShopScreenState extends State<ShopScreen> {
                             },
                           ),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           ],
         ),
       );
@@ -192,11 +188,11 @@ class _ShopScreenState extends State<ShopScreen> {
                 child: Stack(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Container(
                         width: 200,
                         height: 35,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                                 // topLeft: Radius.circular(15),
                                 // bottomLeft: Radius.circular(15)
@@ -205,10 +201,10 @@ class _ShopScreenState extends State<ShopScreen> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 8, right: 8),
+                      padding: const EdgeInsets.only(top: 8, right: 8),
                       child: Text(
                         title,
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                        style: const TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ],
@@ -217,7 +213,7 @@ class _ShopScreenState extends State<ShopScreen> {
 
       return Container(
         width: double.infinity,
-        padding: EdgeInsets.only(right: 10, left: 10, top: 10),
+        padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
         height: 300,
         child: GridView(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -225,21 +221,21 @@ class _ShopScreenState extends State<ShopScreen> {
               childAspectRatio: 3 / 2,
               mainAxisSpacing: 20,
               crossAxisSpacing: 20),
+          padding: EdgeInsets.zero,
           children: [
             genreCard("تخیلی", 'assets/images/genres/fiction.jpg'),
             genreCard("عاشقانه", 'assets/images/genres/romance.jpg'),
             genreCard("تاریخی", 'assets/images/genres/history.jpg'),
             genreCard("ترسناک", 'assets/images/genres/horror.jpg')
           ],
-          padding: EdgeInsets.zero,
         ),
       );
     }
 
-    Widget Section(String title, IconData icon) {
+    Widget section(String title, IconData icon) {
       return Column(children: [
         Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Directionality(
               textDirection: TextDirection.rtl,
               child: Row(
@@ -251,7 +247,7 @@ class _ShopScreenState extends State<ShopScreen> {
                         icon,
                         size: 26,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 13,
                       ),
                       Text(
@@ -264,7 +260,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 ],
               )),
         ),
-        Container(
+        SizedBox(
           height: 250,
           width: double.infinity,
           child: ListView.builder(
@@ -312,7 +308,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 height: 10,
               ),
               genresCards(),
-              Container(
+              SizedBox(
                 width: deviceSize.width * 0.8,
                 height: 150,
                 child: ClipRRect(
@@ -322,11 +318,11 @@ class _ShopScreenState extends State<ShopScreen> {
                       fit: BoxFit.cover,
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-             Section("کتاب های پرطرفدار", Icons.trending_up_rounded),
-              Section("پرفروش های این هفته", Icons.attach_money_rounded)
+             section("کتاب های پرطرفدار", Icons.trending_up_rounded),
+              section("پرفروش های این هفته", Icons.attach_money_rounded)
             ],
           ),
         ),

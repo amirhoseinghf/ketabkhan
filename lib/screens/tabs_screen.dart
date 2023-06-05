@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../models/Book.dart';
 import '../models/User.dart';
 import 'library_screen.dart';
@@ -12,11 +10,10 @@ class TabsScreen extends StatefulWidget {
 
   static const routeName = "/main";
 
-  ThemeMode themeMode;
   User user;
   List<Book> bookList;
   List<Book> myBooks;
-  TabsScreen(this.themeMode, this.user, this.bookList, this.myBooks);
+  TabsScreen(this.user, this.bookList, this.myBooks, {Key key}) : super(key: key);
 
 
   @override
@@ -37,8 +34,8 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     _pages = [
-      {'page': HomeScreen(widget.bookList, widget.themeMode, widget.user), 'title': 'Home'},
-      {'page': ShopScreen(widget.bookList, widget.themeMode, widget.user), 'title': 'Shop'},
+      {'page': HomeScreen(widget.bookList, widget.user), 'title': 'Home'},
+      {'page': ShopScreen(widget.bookList, widget.user), 'title': 'Shop'},
       {'page': LibraryScreen(widget.myBooks, widget.user), 'title': 'Library'},
       {'page': UserScreen(widget.user), 'title': 'User'}
     ];
@@ -55,9 +52,9 @@ class _TabsScreenState extends State<TabsScreen> {
           currentIndex: _selectedPageIndex,
           fixedColor: Colors.white,
           unselectedItemColor: Colors.white,
-          selectedLabelStyle: TextStyle(fontFamily: "IranSans"),
+          selectedLabelStyle: const TextStyle(fontFamily: "IranSans"),
           backgroundColor: Colors.blue,
-          items: [
+          items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'خانه'),
             BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_rounded), label: "فروشگاه"),
             BottomNavigationBarItem(icon: Icon(Icons.local_library_rounded), label: "کتابخانه"),

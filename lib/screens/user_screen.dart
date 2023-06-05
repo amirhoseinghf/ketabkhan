@@ -12,7 +12,7 @@ class UserScreen extends StatefulWidget {
 
   final User user;
 
-  UserScreen(this.user);
+  const UserScreen(this.user, {Key key}) : super(key: key);
 
   @override
   State<UserScreen> createState() => _UserScreenState();
@@ -29,7 +29,7 @@ class _UserScreenState extends State<UserScreen> {
     Widget userDetails() {
       return Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 35,
           ),
           Container(
@@ -37,7 +37,7 @@ class _UserScreenState extends State<UserScreen> {
               decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(500)),
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(500),
                   child: widget.user.profileImageUrl != null ? Image.network(
@@ -47,7 +47,7 @@ class _UserScreenState extends State<UserScreen> {
                     height: 5,
                     errorBuilder: (context, child, loadingProgress) => Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,),
                   ) : Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,))) ,
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -57,7 +57,7 @@ class _UserScreenState extends State<UserScreen> {
                 fontSize: 16,
                 fontFamily: "IranSans"),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Text(
@@ -68,11 +68,17 @@ class _UserScreenState extends State<UserScreen> {
                 fontFamily: "IranSansNum",
                 fontWeight: FontWeight.bold),
           ),
-          Container(
+          SizedBox(
             width: 160,
             child: ElevatedButton(
               onPressed: () {Navigator.pushNamed(context, '/payment').then((value) {setState(() {
               });});},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: current == ThemeMode.light
+                      ? Theme.of(context).primaryColor
+                      : Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15))),
               child: Text(
                 "افزایش اعتبار",
                 style: TextStyle(
@@ -81,12 +87,6 @@ class _UserScreenState extends State<UserScreen> {
                         : Colors.black,
                     fontFamily: "IranSans"),
               ),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: current == ThemeMode.light
-                      ? Theme.of(context).primaryColor
-                      : Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15))),
             ),
           )
         ],
@@ -95,6 +95,7 @@ class _UserScreenState extends State<UserScreen> {
 
     Widget optionsTile(String title, IconData icon, Function fun) {
       return InkWell(
+        onTap: fun,
         child: Directionality(
           textDirection: TextDirection.rtl,
           child: Row(
@@ -106,19 +107,19 @@ class _UserScreenState extends State<UserScreen> {
                     icon,
                     color: Colors.white,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
                     title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontFamily: "IranSans"),
                   )
                 ],
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
                 size: 18,
@@ -126,7 +127,6 @@ class _UserScreenState extends State<UserScreen> {
             ],
           ),
         ),
-        onTap: fun,
       );
     }
 
@@ -134,7 +134,7 @@ class _UserScreenState extends State<UserScreen> {
       return Column(
         children: [
           Row(
-            children: [
+            children: const [
               Icon(
                 Icons.palette,
                 color: Colors.white,
@@ -149,7 +149,7 @@ class _UserScreenState extends State<UserScreen> {
                       fontFamily: "IranSans")),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -157,16 +157,16 @@ class _UserScreenState extends State<UserScreen> {
             children: [
               Column(
                 children: [
-                  Container(
+                  SizedBox(
                       height: 100,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Image.asset(
                               "assets/images/theme/lightMode.png"))),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
-                  Text(
+                  const Text(
                     "روشن",
                     style: TextStyle(
                       fontFamily: "IranSans",
@@ -174,7 +174,7 @@ class _UserScreenState extends State<UserScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 0,
                   ),
                   Radio(
@@ -192,16 +192,16 @@ class _UserScreenState extends State<UserScreen> {
               ),
               Column(
                 children: [
-                  Container(
+                  SizedBox(
                       height: 100,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child:
                               Image.asset("assets/images/theme/darkMode.png"))),
-                  SizedBox(
+                  const SizedBox(
                     height: 8,
                   ),
-                  Text(
+                  const Text(
                     "تاریک",
                     style: TextStyle(
                       fontFamily: "IranSans",
@@ -209,7 +209,7 @@ class _UserScreenState extends State<UserScreen> {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 0,
                   ),
                   Radio(
@@ -250,13 +250,13 @@ class _UserScreenState extends State<UserScreen> {
           child: Column(
             children: [
               userDetails(),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
                 width: deviceSize.width * 0.9,
                 height: deviceSize.height * 0.6,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(15)),
@@ -268,48 +268,48 @@ class _UserScreenState extends State<UserScreen> {
                           "ویرایش اطلاعات", Icons.edit, (){Navigator.pushNamed(context, '/edit').then((value) {setState(() {
 
                           });});}),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.white60,
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       optionsTile("نظرهای من", Icons.mode_comment_outlined, () {}),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.white60,
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       optionsTile("دعوت از دوستان", Icons.person_add_alt_1, (){}),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.white60,
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       optionsTile(
                           "خرید اشتراک ویژه", Icons.monetization_on_outlined, () {}),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
-                      Divider(
+                      const Divider(
                         color: Colors.white60,
                         height: 15,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                       themeSelecting(),
@@ -317,7 +317,7 @@ class _UserScreenState extends State<UserScreen> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -327,7 +327,7 @@ class _UserScreenState extends State<UserScreen> {
                     borderRadius: BorderRadius.circular(15),
                     color: Theme.of(context).primaryColor),
                 child: TextButton(
-                  child: Text(
+                  child: const Text(
                     "خروج از حساب کاربری",
                     style: TextStyle(
                       color: Colors.red,
@@ -338,7 +338,7 @@ class _UserScreenState extends State<UserScreen> {
                   onPressed: () {Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);},
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               )
             ],
