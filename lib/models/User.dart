@@ -8,7 +8,7 @@ class User {
   String name;
   String familyName;
   String profileImageUrl;
-  double credit;
+  double credit = 0;
   String password;
   List<Book> books = [];
 
@@ -19,5 +19,5 @@ class User {
       this.name,
       this.familyName,
       this.profileImageUrl,
-      this.credit});
+      this.credit = 0});
 }

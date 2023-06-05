@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   child: ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {Navigator.pushNamed(context, '/main');},
                                     child: Text(
                                       "ورود",
                                       style: TextStyle(

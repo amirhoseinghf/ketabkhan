@@ -282,7 +282,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   width: deviceSize.width * 0.45,
                   height: 50,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {Navigator.pushNamed(context, '/payment');},
                     child: Text(
                       "خرید اشتراک ویژه",
                       style: TextStyle(fontSize: 16, color: Colors.amber),
@@ -290,8 +290,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     style: OutlinedButton.styleFrom(
                         side: BorderSide(width: 1.0, color: Colors.amber),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                  ))
+                            borderRadius: BorderRadius.circular(15),)),
+                  )),
             ],
           ),
         ],

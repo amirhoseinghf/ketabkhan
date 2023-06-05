@@ -10,6 +10,8 @@ import 'home_screen.dart';
 
 class TabsScreen extends StatefulWidget {
 
+  static const routeName = "/main";
+
   ThemeMode themeMode;
   User user;
   List<Book> bookList;

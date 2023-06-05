@@ -11,6 +11,7 @@ import './screens/login_screen.dart';
 import './screens/register_screen.dart';
 import './screens/library_screen.dart';
 import './screens/payment_screen.dart';
+import './screens/profileedit_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -44,7 +45,9 @@ class _MyAppState extends State<MyApp> {
     return _themeMode;
   }
 
-  User emma = new User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
+  User appUser = User(email: "", userName: "", password: "");
+
+  User emma = User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
 
   List<Book> dummy_books = [
     Book(
@@ -265,7 +268,7 @@ class _MyAppState extends State<MyApp> {
               headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
               headlineSmall: TextStyle(color: Colors.black, fontSize: 20),
               headlineMedium: TextStyle(color: Colors.black, fontSize: 23, fontFamily: "IranSans",),
-            titleSmall: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 18),
+            titleSmall: TextStyle(color: Colors.black, fontSize: 18),
             titleMedium: TextStyle(color: Colors.white, fontSize: 20,),
             titleLarge: TextStyle(color: Colors.black, fontSize: 20),
 
@@ -290,17 +293,18 @@ class _MyAppState extends State<MyApp> {
 
 
 
-      // initialRoute: '/',
+      initialRoute: LoginScreen.routeName,
       routes: {
-        '/': (context) => TabsScreen(_themeMode, emma, dummy_books, emma.books),
+        TabsScreen.routeName: (context) => TabsScreen(_themeMode, appUser, dummy_books, emma.books),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
         HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, emma),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(emma.books, emma),
         ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode, emma),
-        UserScreen.routeName: (context) => UserScreen(emma),
+        UserScreen.routeName: (context) => UserScreen(appUser),
         PaymentScreen.routeName: (context) => PaymentScreen(emma),
+        ProfileEditScreen.routeName: (context) => ProfileEditScreen(appUser),
       },
 
     );

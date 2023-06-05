@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../models/User.dart';
+import 'package:ketabkhan/main.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = "/register";
@@ -93,6 +94,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         if (emailAddress.length == 0) return "مقدار ایمیل نمی تواند خالی باشد";
                                         else if (!emailAddress.contains("@") || !emailAddress.contains(".")) return "ایمیل شما نامعتبر می باشد";
                                       },
+                                      style: Theme.of(context).textTheme.headlineSmall,
+
                                     ),
 
                                     SizedBox(
@@ -110,7 +113,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           suffixIcon: Icon(Icons.person)),
                                       keyboardType: TextInputType.emailAddress,
                                       onChanged: (user) => userName = user,
+                                      style: Theme.of(context).textTheme.headlineSmall,
                                     ),
+
                                     SizedBox(
                                       height: 15,
                                     ),
@@ -129,6 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         if (password.length < 8) return "رمز عبور شما باید حداقل دارای 8 کاراکتر باشد.";
                                         else if (password.contains(userName)) return "رمز عبور شما نمی تواند شامل نام کاربری شما باشد.";
                                       },
+                                      style: Theme.of(context).textTheme.headlineSmall,
                                       onChanged: (pass) => password = pass,
                                     ),
 
@@ -147,6 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: Icon(Icons.key)),
                                       validator: (value) {if (value != password) return "رمز عبور شما یکسان نیست";},
+                                      style: Theme.of(context).textTheme.headlineSmall,
                                     ),
 
                                     SizedBox(
@@ -159,7 +166,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       child: ElevatedButton(
                                         onPressed: () {if(_formKey.currentState.validate()) {
                                           print("Done");
-                                          Navigator.pushNamed(context, '/home');
+                                          MyApp.of(context).appUser.userName = userName;
+                                          MyApp.of(context).appUser.email = email;
+                                          MyApp.of(context).appUser.password = password;
+                                          Navigator.pushNamed(context, '/main');
                                         }},
                                         child: Text("ثبت نام", style: TextStyle(fontSize: 17, fontFamily: "IranSans", color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.black : Colors.white),),
                                         style: ButtonStyle(

@@ -40,18 +40,18 @@ class _UserScreenState extends State<UserScreen> {
               padding: EdgeInsets.all(15),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(500),
-                  child: Image.network(
-                    widget.user.profileImageUrl,
+                  child: widget.user.profileImageUrl != null ? Image.network(
+                   widget.user.profileImageUrl,
                     fit: BoxFit.contain,
                     // color: Colors.white,
                     height: 5,
                     errorBuilder: (context, child, loadingProgress) => Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,),
-                  ))),
+                  ) : Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,))) ,
           SizedBox(
             height: 10,
           ),
           Text(
-            "${widget.user.name} ${widget.user.familyName}",
+            widget.user.name != null ?"${widget.user.name} ${widget.user.familyName}" : widget.user.userName,
             style: TextStyle(
                 color: current == ThemeMode.light || (current == ThemeMode.system && ThemeMode.system == ThemeMode.light) ? Colors.black : Colors.white,
                 fontSize: 16,
@@ -93,37 +93,40 @@ class _UserScreenState extends State<UserScreen> {
       );
     }
 
-    Widget optionsTile(String title, IconData icon) {
-      return Directionality(
-        textDirection: TextDirection.rtl,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  title,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontFamily: "IranSans"),
-                )
-              ],
-            ),
-            Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: Colors.white,
-              size: 18,
-            )
-          ],
+    Widget optionsTile(String title, IconData icon, Function fun) {
+      return InkWell(
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    icon,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    title,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontFamily: "IranSans"),
+                  )
+                ],
+              ),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+                size: 18,
+              )
+            ],
+          ),
         ),
+        onTap: fun,
       );
     }
 
@@ -262,7 +265,9 @@ class _UserScreenState extends State<UserScreen> {
                   child: Column(
                     children: [
                       optionsTile(
-                          "پسندیده های من", Icons.favorite_border_rounded),
+                          "ویرایش اطلاعات", Icons.edit, (){Navigator.pushNamed(context, '/edit').then((value) {setState(() {
+
+                          });});}),
                       SizedBox(
                         height: 6,
                       ),
@@ -273,7 +278,7 @@ class _UserScreenState extends State<UserScreen> {
                       SizedBox(
                         height: 6,
                       ),
-                      optionsTile("نظرهای من", Icons.mode_comment_outlined),
+                      optionsTile("نظرهای من", Icons.mode_comment_outlined, () {}),
                       SizedBox(
                         height: 6,
                       ),
@@ -284,7 +289,7 @@ class _UserScreenState extends State<UserScreen> {
                       SizedBox(
                         height: 6,
                       ),
-                      optionsTile("دعوت از دوستان", Icons.person_add_alt_1),
+                      optionsTile("دعوت از دوستان", Icons.person_add_alt_1, (){}),
                       SizedBox(
                         height: 6,
                       ),
@@ -296,7 +301,7 @@ class _UserScreenState extends State<UserScreen> {
                         height: 6,
                       ),
                       optionsTile(
-                          "خرید اشتراک ویژه", Icons.monetization_on_outlined),
+                          "خرید اشتراک ویژه", Icons.monetization_on_outlined, () {}),
                       SizedBox(
                         height: 6,
                       ),
