@@ -35,7 +35,7 @@ class _TabsScreenState extends State<TabsScreen> {
   void initState() {
     super.initState();
     _pages = [
-      {'page': HomeScreen(widget.bookList, widget.themeMode), 'title': 'Home'},
+      {'page': HomeScreen(widget.bookList, widget.themeMode, widget.user), 'title': 'Home'},
       {'page': ShopScreen(widget.bookList, widget.themeMode), 'title': 'Shop'},
       {'page': LibraryScreen(widget.bookList), 'title': 'Library'},
       {'page': UserScreen(widget.user), 'title': 'User'}

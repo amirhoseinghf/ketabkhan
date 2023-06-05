@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../models/User.dart';
 import '../widgets/LinProg.dart';
 import '../widgets/BookWidget.dart';
 class DetailsScreen extends StatefulWidget {
@@ -11,9 +12,10 @@ class DetailsScreen extends StatefulWidget {
   String author;
   int price;
   ThemeMode themeMode;
+  User user;
 
   DetailsScreen(
-      {@required this.imageUrl, this.bookName, this.author, this.price, this.themeMode});
+      {@required this.imageUrl, this.bookName, this.author, this.price, this.themeMode, this.user});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();

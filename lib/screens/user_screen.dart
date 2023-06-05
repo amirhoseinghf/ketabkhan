@@ -21,6 +21,7 @@ class UserScreen extends StatefulWidget {
 class _UserScreenState extends State<UserScreen> {
 
 
+
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
@@ -70,7 +71,8 @@ class _UserScreenState extends State<UserScreen> {
           Container(
             width: 160,
             child: ElevatedButton(
-              onPressed: () {Navigator.pushNamed(context, '/payment');},
+              onPressed: () {Navigator.pushNamed(context, '/payment').then((value) {setState(() {
+              });});},
               child: Text(
                 "افزایش اعتبار",
                 style: TextStyle(

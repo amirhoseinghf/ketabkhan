@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import '../models/User.dart';
 import '../widgets/BookWidget.dart';
 import '../models/Book.dart';
 
 class HomeSoundBooksScreen extends StatelessWidget {
   List<Book> dummy;
   ThemeMode themeMode;
-  HomeSoundBooksScreen(this.dummy, this.themeMode);
+  User user;
+  HomeSoundBooksScreen(this.dummy, this.themeMode, this.user);
 
 
 
@@ -50,7 +52,7 @@ class HomeSoundBooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: favoritesList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: favoritesList[index].name, author: favoritesList[index].author, imageUrl: favoritesList[index].imageUrl, price: favoritesList[index].price, themeMode: themeMode),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: favoritesList[index].name, author: favoritesList[index].author, imageUrl: favoritesList[index].imageUrl, price: favoritesList[index].price, themeMode: themeMode, user: user,),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -60,7 +62,7 @@ class HomeSoundBooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: newList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: newList[index].name, author: newList[index].author, imageUrl: newList[index].imageUrl,price: newList[index].price, themeMode: themeMode,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: newList[index].name, author: newList[index].author, imageUrl: newList[index].imageUrl,price: newList[index].price, themeMode: themeMode, user: user,),);},
                 ),
               ),
               SizedBox(height: 20,),
@@ -70,7 +72,7 @@ class HomeSoundBooksScreen extends StatelessWidget {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: topSellingList.length,
-                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: topSellingList[index].name, author: topSellingList[index].author, imageUrl: topSellingList[index].imageUrl, price: topSellingList[index].price, themeMode: themeMode,),);},
+                  itemBuilder: (ctx, index) {return Container(child: BookWidget(name: topSellingList[index].name, author: topSellingList[index].author, imageUrl: topSellingList[index].imageUrl, price: topSellingList[index].price, themeMode: themeMode, user: user,),);},
                 ),
               ),
             ],

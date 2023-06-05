@@ -38,7 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_rating_bar: ^4.0.1
   comment_box: ^0.0.18
-  flutter_credit_card: ^3.0.6
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

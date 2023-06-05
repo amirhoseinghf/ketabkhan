@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
 import 'package:ketabkhan/widgets/BookWidget.dart';
 import 'package:ketabkhan/widgets/CurrentReadingBookWidget.dart';
+import '../models/User.dart';
 import './home_ebooks_screen.dart';
 import '../models/Book.dart';
 
@@ -10,8 +11,9 @@ class HomeScreen extends StatefulWidget {
 
   List<Book> dummy_books;
   ThemeMode themeMode;
+  User user;
 
-  HomeScreen(this.dummy_books, this.themeMode);
+  HomeScreen(this.dummy_books, this.themeMode, this.user);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -80,11 +82,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeEbooksScreen(widget.dummy_books, widget.themeMode),
+                    child: HomeEbooksScreen(widget.dummy_books, widget.themeMode, widget.user),
                   ),
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeSoundBooksScreen(widget.dummy_books, widget.themeMode),
+                    child: HomeSoundBooksScreen(widget.dummy_books, widget.themeMode, widget.user),
                   ),
                 ],
               ),

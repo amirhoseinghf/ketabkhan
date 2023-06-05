@@ -295,12 +295,12 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => TabsScreen(_themeMode, emma, dummy_books,),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
-        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode),
+        HomeScreen.routeName: (context) => HomeScreen(dummy_books, _themeMode, emma),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(dummy_books),
         ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode),
         UserScreen.routeName: (context) => UserScreen(emma),
-        PaymentScreen.routeName: (context) => PaymentScreen(),
+        PaymentScreen.routeName: (context) => PaymentScreen(emma),
       },
 
     );
