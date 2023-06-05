@@ -70,7 +70,7 @@ class _UserScreenState extends State<UserScreen> {
           Container(
             width: 160,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {Navigator.pushNamed(context, '/payment');},
               child: Text(
                 "افزایش اعتبار",
                 style: TextStyle(
@@ -166,6 +166,7 @@ class _UserScreenState extends State<UserScreen> {
                     style: TextStyle(
                       fontFamily: "IranSans",
                       fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
@@ -200,6 +201,7 @@ class _UserScreenState extends State<UserScreen> {
                     style: TextStyle(
                       fontFamily: "IranSans",
                       fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(

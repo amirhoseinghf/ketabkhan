@@ -203,12 +203,13 @@ class _ShopScreenState extends State<ShopScreen> {
                     Padding(
                       padding: EdgeInsets.only(top: 10),
                       child: Container(
-                        width: 120,
+                        width: 200,
                         height: 35,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomLeft: Radius.circular(15)),
+                                // topLeft: Radius.circular(15),
+                                // bottomLeft: Radius.circular(15)
+                            ),
                             color: Colors.black38),
                       ),
                     ),

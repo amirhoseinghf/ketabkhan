@@ -10,6 +10,7 @@ import './screens/home_screen.dart';
 import './screens/login_screen.dart';
 import './screens/register_screen.dart';
 import './screens/library_screen.dart';
+import './screens/payment_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -262,7 +263,7 @@ class _MyAppState extends State<MyApp> {
             bodyMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16, textBaseline: TextBaseline.alphabetic),
             bodySmall: TextStyle(color: Colors.black, fontSize: 16),
               headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
-              headlineSmall: TextStyle(color: Colors.black, fontSize: 24),
+              headlineSmall: TextStyle(color: Colors.black, fontSize: 20),
               headlineMedium: TextStyle(color: Colors.black, fontSize: 23, fontFamily: "IranSans",),
             titleSmall: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 18),
             titleMedium: TextStyle(color: Colors.white, fontSize: 20,),
@@ -278,7 +279,8 @@ class _MyAppState extends State<MyApp> {
         bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
         headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
         headlineMedium: TextStyle(color: Colors.white, fontSize: 23, fontFamily: "IranSans"),
-        titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSans" ),
+            headlineSmall: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "IranSansNum"),
+        titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSansNum" ),
         titleMedium: TextStyle(color: Colors.black, fontSize: 20, fontFamily: "IranSans"),
             titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans")
         ),
@@ -298,6 +300,7 @@ class _MyAppState extends State<MyApp> {
         LibraryScreen.routeName: (context) => LibraryScreen(dummy_books),
         ShopScreen.routeName: (context) => ShopScreen(dummy_books, _themeMode),
         UserScreen.routeName: (context) => UserScreen(emma),
+        PaymentScreen.routeName: (context) => PaymentScreen(),
       },
 
     );

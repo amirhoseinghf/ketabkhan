@@ -48,11 +48,6 @@ class _LibraryScreenState extends State<LibraryScreen> {
             initialValue: 'soundBook',
 
           ),
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: Icon(Icons.arrow_forward_ios_rounded))
-          ],
           automaticallyImplyLeading: false,
           backgroundColor: Theme.of(context).primaryColor,
           title: SvgPicture.asset(
