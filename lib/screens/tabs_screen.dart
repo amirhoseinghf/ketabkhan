@@ -43,6 +43,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Tab> tabs;
     return Scaffold(
       body: _pages[_selectedPageIndex]['page'],
       bottomNavigationBar: Theme(

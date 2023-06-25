@@ -380,8 +380,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("به این کتاب امتیاز دهید", style: TextStyle(fontFamily: "IranSans", fontWeight: FontWeight.bold, fontSize: 15),),
-                  Text("نظر خود را با دیگران به اشتراک بگذارید", style: TextStyle(fontFamily: "IranSans", fontSize: 10)),
+                  Text("به این کتاب امتیاز دهید", style: TextStyle(fontFamily: "IranSans", fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white),),
+                  Text("نظر خود را با دیگران به اشتراک بگذارید", style: TextStyle(fontFamily: "IranSans", fontSize: 10, color: Colors.white)),
                 ],),
             ],
           ),
@@ -407,7 +407,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(children: [
-                Text(currentRating.toStringAsFixed(1), style: TextStyle(fontFamily: "IranSansNum", fontWeight: FontWeight.bold, fontSize: 40,),),
+                Text(currentRating.toStringAsFixed(1), style: TextStyle(fontFamily: "IranSansNum", fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white),),
                 RatingBar(
                   initialRating: currentRating,
                   minRating: 0,
@@ -424,7 +424,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ignoreGestures: true,
                 ),
                 SizedBox(height: 5,),
-                Text("${count} تعداد نظرات ", style: TextStyle(fontFamily: "IranSansNum", fontSize: 15,),),
+                Text("${count} تعداد نظرات ", style: TextStyle(fontFamily: "IranSansNum", fontSize: 15, color: Colors.white),),
               ],),
               Container(
                   width: 200,

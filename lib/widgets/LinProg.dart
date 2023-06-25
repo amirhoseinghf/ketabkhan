@@ -15,7 +15,7 @@ class LinProg extends StatelessWidget {
         children: [
           Text(
             num.toString(),
-            style: const TextStyle(fontFamily: "IranSansNum"),
+            style: const TextStyle(fontFamily: "IranSansNum" , color: Colors.white),
           ),
           const SizedBox(
             width: 7,

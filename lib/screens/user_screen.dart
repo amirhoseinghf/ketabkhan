@@ -42,7 +42,7 @@ class _UserScreenState extends State<UserScreen> {
                   borderRadius: BorderRadius.circular(500),
                   child: widget.user.profileImageUrl != null ? Image.network(
                    widget.user.profileImageUrl,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.fill,
                     // color: Colors.white,
                     height: 5,
                     errorBuilder: (context, child, loadingProgress) => Image.network("https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png", color: Colors.white,),
