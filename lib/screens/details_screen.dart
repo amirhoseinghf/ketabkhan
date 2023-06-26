@@ -5,14 +5,15 @@ import '../models/Book.dart';
 import '../models/User.dart';
 import '../widgets/LinProg.dart';
 import '../widgets/BookWidget.dart';
+import './share_screen.dart';
+
 class DetailsScreen extends StatefulWidget {
   static const routeName = '/details';
 
   User user;
   Book book;
 
-  DetailsScreen(
-      {this.user, this.book});
+  DetailsScreen({this.user, this.book});
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -34,10 +35,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
+    var brightness = MediaQuery
+        .of(context)
+        .platformBrightness;
 
-    var deviceSize = MediaQuery.of(context).size;
-
+    var deviceSize = MediaQuery
+        .of(context)
+        .size;
 
 
     double addAndReturnSum(double rating) {
@@ -47,31 +51,39 @@ class _DetailsScreenState extends State<DetailsScreen> {
         var sum = total / count;
         currentRating = sum;
 
-        if(rating > 0 && rating <= 1.5) countOf1s++;
-        if(rating > 1.5 && rating <= 2.5) countOf2s++;
-        if(rating > 2.5 && rating <= 3.5) countOf3s++;
-        if(rating > 3.5 && rating <= 4.5) countOf4s++;
-        if(rating > 4.5 && rating <= 5) countOf5s++;
+        if (rating > 0 && rating <= 1.5) countOf1s++;
+        if (rating > 1.5 && rating <= 2.5) countOf2s++;
+        if (rating > 2.5 && rating <= 3.5) countOf3s++;
+        if (rating > 3.5 && rating <= 4.5) countOf4s++;
+        if (rating > 4.5 && rating <= 5) countOf5s++;
 
         return sum;
       });
     }
 
     double percent(int num) {
-
-      switch(num) {
-        case 5: dm = countOf5s; break;
-        case 4: dm = countOf4s; break;
-        case 3: dm = countOf3s; break;
-        case 2: dm = countOf2s; break;
-        case 1: dm = countOf1s; break;
+      switch (num) {
+        case 5:
+          dm = countOf5s;
+          break;
+        case 4:
+          dm = countOf4s;
+          break;
+        case 3:
+          dm = countOf3s;
+          break;
+        case 2:
+          dm = countOf2s;
+          break;
+        case 1:
+          dm = countOf1s;
+          break;
       }
-      if(count == 0) {
+      if (count == 0) {
         return 0;
       } else {
         return dm / count;
       }
-
     }
 
     Widget BookInformation() {
@@ -97,12 +109,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
           Text(
             widget.book.name,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme
+                .of(context)
+                .textTheme
+                .headlineLarge,
           ),
           SizedBox(
             height: 5,
           ),
-          Text(widget.book.author, style: Theme.of(context).textTheme.titleSmall,)
+          Text(widget.book.author, style: Theme
+              .of(context)
+              .textTheme
+              .titleSmall,)
         ],
       );
     }
@@ -140,7 +158,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               ),
               Text(
                 "از ${count.toStringAsFixed(0)} رای",
-                style: TextStyle(color: Colors.grey, fontSize: 13, fontFamily: "IranSans"),
+                style: TextStyle(
+                    color: Colors.grey, fontSize: 13, fontFamily: "IranSans"),
               ),
             ],
           ),
@@ -211,17 +230,23 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ));
                   }
                 });
-
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Theme.of(context).buttonColor,
+                backgroundColor: Theme
+                    .of(context)
+                    .buttonColor,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 padding: EdgeInsets.all(20),
               ),
               child: Text(
-               widget.user.books.contains(widget.book) ? "شما این کتاب را خریداری کرده اید" : " خرید | ${widget.book.price} هزار تومان",
-                style: Theme.of(context).textTheme.titleMedium,
+                widget.user.books.contains(widget.book)
+                    ? "شما این کتاب را خریداری کرده اید"
+                    : " خرید | ${widget.book.price} هزار تومان",
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .titleMedium,
               ),
             ),
           ),
@@ -236,9 +261,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 50,
                   child: OutlinedButton(
                     onPressed: () {
-                      if(widget.user.books.contains(widget.book))  {setState(() {
-                        widget.book.isReadingNow = true;
-                      });} else {
+                      if (widget.user.books.contains(widget.book)) {
+                        setState(() {
+                          widget.book.isReadingNow = true;
+                        });
+                      } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(
                           content: Directionality(
@@ -266,13 +293,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       }
                     },
                     child: Text(
-                     widget.book.isReadingNow ? "در حال خواندن" : "خواندن",
-                      style: Theme.of(context).textTheme.bodyMedium
+                        widget.book.isReadingNow ? "در حال خواندن" : "خواندن",
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyMedium
                     ),
                     style: OutlinedButton.styleFrom(
                         side: BorderSide(
                             width: 1.0,
-                            color: Theme.of(context).buttonColor),
+                            color: Theme
+                                .of(context)
+                                .buttonColor),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                   )),
@@ -283,7 +315,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   width: deviceSize.width * 0.45,
                   height: 50,
                   child: OutlinedButton(
-                    onPressed: () {Navigator.pushNamed(context, '/payment');},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/payment');
+                    },
                     child: Text(
                       "خرید اشتراک ویژه",
                       style: TextStyle(fontSize: 16, color: Colors.amber),
@@ -291,7 +325,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     style: OutlinedButton.styleFrom(
                         side: BorderSide(width: 1.0, color: Colors.amber),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),)),
+                          borderRadius: BorderRadius.circular(15),)),
                   )),
             ],
           ),
@@ -306,7 +340,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
               text: TextSpan(
                   text:
                   "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد. ادامه توضیحات..",
-                  style: Theme.of(context).textTheme.bodySmall)));
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .bodySmall)));
     }
 
     Widget BookDetails() {
@@ -314,7 +351,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
           width: double.infinity,
           padding: EdgeInsets.all(5),
           decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme
+                  .of(context)
+                  .primaryColor,
               borderRadius: BorderRadius.circular(15)),
           child: Directionality(
             textDirection: TextDirection.rtl,
@@ -323,44 +362,56 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ListTile(
                   leading: Text(
                     "نام نویسنده",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9),
+                        fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     widget.book.author,
-                    style: TextStyle(color: Theme.of(context).accentColor),
+                    style: TextStyle(color: Theme
+                        .of(context)
+                        .accentColor),
                   ),
                 ),
                 Divider(),
                 ListTile(
                   leading: Text(
                     "قیمت",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9),
+                        fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "${widget.book.price} هزار تومان",
-                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSansNum"),
+                    style: TextStyle(color: Theme
+                        .of(context)
+                        .accentColor, fontFamily: "IranSansNum"),
                   ),
                 ),
                 Divider(),
                 ListTile(
                   leading: Text(
                     "ژانر",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9),
+                        fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "فانتزی",
-                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSans"),
+                    style: TextStyle(color: Theme
+                        .of(context)
+                        .accentColor, fontFamily: "IranSans"),
                   ),
                 ),
                 Divider(),
                 ListTile(
                   leading: Text(
                     "دسته بندی",
-                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontFamily: "IranSans"),
+                    style: TextStyle(color: Colors.white.withOpacity(0.9),
+                        fontFamily: "IranSans"),
                   ),
                   trailing: Text(
                     "کتاب های الکترونیک",
-                    style: TextStyle(color: Theme.of(context).accentColor, fontFamily: "IranSans"),
+                    style: TextStyle(color: Theme
+                        .of(context)
+                        .accentColor, fontFamily: "IranSans"),
                   ),
                 ),
               ],
@@ -371,7 +422,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
     Widget ReviewAndComment() {
       return Container(
         width: double.infinity,
-        decoration: BoxDecoration(color: Theme.of(context).primaryColor, borderRadius: BorderRadius.circular(15)),
+        decoration: BoxDecoration(color: Theme
+            .of(context)
+            .primaryColor, borderRadius: BorderRadius.circular(15)),
         padding: EdgeInsets.all(10),
         child: Column(children: [
           Row(
@@ -380,13 +433,20 @@ class _DetailsScreenState extends State<DetailsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text("به این کتاب امتیاز دهید", style: TextStyle(fontFamily: "IranSans", fontWeight: FontWeight.bold, fontSize: 15, color: Colors.white),),
-                  Text("نظر خود را با دیگران به اشتراک بگذارید", style: TextStyle(fontFamily: "IranSans", fontSize: 10, color: Colors.white)),
+                  Text("به این کتاب امتیاز دهید", style: TextStyle(
+                      fontFamily: "IranSans",
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Colors.white),),
+                  Text("نظر خود را با دیگران به اشتراک بگذارید",
+                      style: TextStyle(fontFamily: "IranSans",
+                          fontSize: 10,
+                          color: Colors.white)),
                 ],),
             ],
           ),
           SizedBox(height: 15,),
-          Center(child:  RatingBar(
+          Center(child: RatingBar(
             initialRating: 0,
             updateOnDrag: false,
             tapOnlyMode: false,
@@ -407,7 +467,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Column(children: [
-                Text(currentRating.toStringAsFixed(1), style: TextStyle(fontFamily: "IranSansNum", fontWeight: FontWeight.bold, fontSize: 40, color: Colors.white),),
+                Text(currentRating.toStringAsFixed(1), style: TextStyle(
+                    fontFamily: "IranSansNum",
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                    color: Colors.white),),
                 RatingBar(
                   initialRating: currentRating,
                   minRating: 0,
@@ -424,7 +488,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ignoreGestures: true,
                 ),
                 SizedBox(height: 5,),
-                Text("${count} تعداد نظرات ", style: TextStyle(fontFamily: "IranSansNum", fontSize: 15, color: Colors.white),),
+                Text("${count} تعداد نظرات ", style: TextStyle(
+                    fontFamily: "IranSansNum",
+                    fontSize: 15,
+                    color: Colors.white),),
               ],),
               Container(
                   width: 200,
@@ -457,8 +524,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
               icon: Icon(Icons.arrow_forward_ios_rounded))
         ],
         automaticallyImplyLeading: false,
-        backgroundColor: Theme.of(context).primaryColor,
-        leading: Icon(Icons.share_rounded),
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
+        leading: IconButton(icon: Icon(Icons.share_rounded), onPressed: () {
+          showModalBottomSheet(context: context, builder: (_){
+            return ShareScreen();
+          });
+        }),
         title: SvgPicture.asset(
           'assets/images/ketabkhan.svg',
           height: 27,
