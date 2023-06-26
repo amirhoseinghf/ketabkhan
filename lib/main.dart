@@ -45,6 +45,8 @@ class MyAppState extends State<MyApp> {
     return _themeMode;
   }
 
+
+
   User appUser = User(email: "admin", userName: "admin", password: "admin");
 
   // User emma = User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);

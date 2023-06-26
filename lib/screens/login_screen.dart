@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ketabkhan/main.dart';
@@ -131,36 +133,73 @@ class LoginScreen extends StatelessWidget {
                                 SizedBox(
                                   width: double.infinity,
                                   child: ElevatedButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       if(_formKey.currentState.validate()) {
-                                        if(email == MyApp.of(context).appUser.email && password == MyApp.of(context).appUser.password) {
-                                          Navigator.pushNamed(context, '/main');
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackBar(
-                                            content: Directionality(
-                                                textDirection: TextDirection.rtl,
-                                                child: Row(
-                                                  children: const [
-                                                    Icon(
-                                                      Icons.done_all_rounded,
-                                                      color: Colors.white,
-                                                    ),
-                                                    SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(
-                                                      "با موفقیت وارد شدید.",
-                                                      style: TextStyle(
+
+                                        await Socket.connect("10.0.2.2", 2424).then((socket) {
+                                          print("Waited");
+                                          socket.write("sign_in\nemail:$email,,password:$password\u0000");
+                                          socket.listen((response) {
+                                            if(String.fromCharCodes(response) == "done") {
+                                              Navigator.pushNamed(context, '/main');
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Directionality(
+                                                    textDirection: TextDirection.rtl,
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(
+                                                          Icons.done_all_rounded,
                                                           color: Colors.white,
-                                                          fontSize: 20,
-                                                          fontFamily: "IranSansNum"),
-                                                    ),
-                                                  ],
-                                                )),
-                                            backgroundColor: Colors.green,
-                                            duration: const Duration(seconds: 3),
-                                          ));
-                                        }
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          "با موفقیت وارد شدید.",
+                                                          style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 20,
+                                                              fontFamily: "IranSansNum"),
+                                                        ),
+                                                      ],
+                                                    )),
+                                                backgroundColor: Colors.green,
+                                                duration: const Duration(seconds: 3),
+                                              ));
+                                            }
+
+                                            if(String.fromCharCodes(response) == "failed") {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Directionality(
+                                                    textDirection: TextDirection.rtl,
+                                                    child: Row(
+                                                      children: const [
+                                                        Icon(
+                                                          Icons.done_all_rounded,
+                                                          color: Colors.white,
+                                                        ),
+                                                        SizedBox(
+                                                          width: 10,
+                                                        ),
+                                                        Text(
+                                                          "مشخصات کاربری شما یافت نشد 😢",
+                                                          style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontSize: 20,
+                                                              fontFamily: "IranSansNum"),
+                                                        ),
+                                                      ],
+                                                    )),
+                                                backgroundColor: Colors.red,
+                                                duration: const Duration(seconds: 3),
+                                              ));
+                                            }
+
+
+                                          });
+                                        });
                                       }
                                     },
                                     style: ButtonStyle(

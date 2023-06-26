@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ketabkhan/main.dart';
@@ -152,7 +154,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextFormField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          label: const Text("رمز عبور"),
+                                          label: const Text("تکرار رمز عبور"),
                                           labelStyle: const TextStyle(fontSize: 20),
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
@@ -169,10 +171,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     SizedBox(
                                       width: double.infinity,
                                       child: ElevatedButton(
-                                        onPressed: () {if(_formKey.currentState.validate()) {
+                                        onPressed: () async {if(_formKey.currentState.validate()) {
                                           MyApp.of(context).appUser.userName = userName;
                                           MyApp.of(context).appUser.email = email;
                                           MyApp.of(context).appUser.password = password;
+
+                                          await Socket.connect("10.0.2.2", 2424).then((socket) {
+                                            socket.write("sign_up\nemail:$email,,username:$userName,,password:$password\u0000");
+                                            print("FDF");
+                                          });
                                           Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
                                         }},
                                         style: ButtonStyle(
