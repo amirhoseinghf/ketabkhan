@@ -135,12 +135,12 @@ class LoginScreen extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () async {
                                       if(_formKey.currentState.validate()) {
-
                                         await Socket.connect("10.0.2.2", 2424).then((socket) {
                                           print("Waited");
                                           socket.write("sign_in\nemail:$email,,password:$password\u0000");
                                           socket.listen((response) {
                                             if(String.fromCharCodes(response) == "done") {
+                                              MyApp.of(context).getUser();
                                               Navigator.pushNamed(context, '/main');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(

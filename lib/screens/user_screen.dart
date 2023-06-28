@@ -16,8 +16,10 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+
   @override
   Widget build(BuildContext context) {
+    MyApp.of(context).getUser();
     var deviceSize = MediaQuery.of(context).size;
     ThemeMode current = MyApp.of(context).getTheme() == ThemeMode.dark
         ? ThemeMode.dark
@@ -56,7 +58,7 @@ class _UserScreenState extends State<UserScreen> {
             height: 10,
           ),
           Text(
-            widget.user.name != null
+            (widget.user.name != null && widget.user.name != "admin")
                 ? "${widget.user.name} ${widget.user.familyName}"
                 : widget.user.userName,
             style: TextStyle(

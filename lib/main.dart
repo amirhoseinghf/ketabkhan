@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import './screens/tabs_screen.dart';
 import './screens/shop_screen.dart';
@@ -48,6 +51,34 @@ class MyAppState extends State<MyApp> {
 
 
   User appUser = User(email: "admin", userName: "admin", password: "admin");
+  static List<Book> boooks = [];
+
+  Future<User> getUser() async {
+    await Socket.connect("10.0.2.2", 2424).then((socket) {
+      socket.write("get_user_info\n \u0000");
+      socket.listen((response) {
+        var info = jsonDecode(String.fromCharCodes(response));
+        appUser.email = info['email'];
+        appUser.userName = info['userName'];
+        appUser.name = info['name'];
+        appUser.familyName = info['familyName'];
+        appUser.credit = info['credit'];
+        appUser.password = info['password'];
+        List<dynamic> bookIds =info['booksIds'];
+        List<Book> appUserBooks = [];
+        bookIds.forEach((element) {
+          Book b;
+          dummy_books.forEach((someBook) {if(someBook.id == element) {
+
+            appUserBooks.add(someBook);
+
+          }});
+        });
+        appUser.books = appUserBooks;
+        boooks = appUserBooks;
+      });
+    });
+  }
 
   // User emma = User(email: "emma@gmail.com", userName: "Emmaw11", name: "اما", familyName: "واتسون", password: "PASS", profileImageUrl: "https://www.himalmag.com/wp-content/uploads/2019/07/sample-profile-picture.png", credit: 0);
 
@@ -300,7 +331,7 @@ class MyAppState extends State<MyApp> {
         TabsScreen.routeName: (context) => TabsScreen(appUser, dummy_books, appUser.books),
         LoginScreen.routeName: (context) => LoginScreen(_themeMode),
         RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
-        HomeScreen.routeName: (context) => HomeScreen(dummy_books, appUser),
+        HomeScreen.routeName: (context) => HomeScreen(appUser.books, appUser),
         DetailsScreen.routeName: (context) => DetailsScreen(),
         LibraryScreen.routeName: (context) => LibraryScreen(appUser.books, appUser),
         ShopScreen.routeName: (context) => ShopScreen(dummy_books, appUser),

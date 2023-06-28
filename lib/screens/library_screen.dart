@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:ketabkhan/main.dart';
 import '../models/User.dart';
 import '../widgets/BookWidget.dart';
 import '../models/Book.dart';
@@ -20,15 +24,15 @@ class _LibraryScreenState extends State<LibraryScreen> {
 
   @override
   void initState() {
-    widget.finalList = widget.bookList;
+    widget.finalList = widget.user.books;
     super.initState();
   }
+
+
   @override
   Widget build(BuildContext context) {
-    
-
-    List<Book> ebookList = widget.bookList.where((element) => element.type == Type.ebooks).toList();
-    List<Book> soundBookList = widget.bookList.where((element) => element.type == Type.soundBooks).toList();
+    List<Book> ebookList = widget.user.books.where((element) => element.type == Type.ebooks).toList();
+    List<Book> soundBookList = widget.user.books.where((element) => element.type == Type.soundBooks).toList();
 
     return DefaultTabController(
       length: 1,

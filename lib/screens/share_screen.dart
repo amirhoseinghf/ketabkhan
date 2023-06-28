@@ -38,6 +38,7 @@ class ShareScreen extends StatelessWidget {
           Container(
               height: 80,
               width: 80,
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(15), border: Border.all(color: Colors.white, width: 7)),
               child: Image.network(
                 imageUrl,
                 fit: BoxFit.cover,
@@ -62,8 +63,8 @@ class ShareScreen extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(icon),
-              Text(name, style: Theme.of(context).textTheme.headlineSmall,)
+              Icon(icon, color: Colors.black),
+              Text(name, style: TextStyle(color: Colors.black, fontFamily: "IranSansNum"),)
             ],),
         );
   }

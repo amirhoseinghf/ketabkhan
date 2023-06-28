@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../models/Book.dart';
 import '../models/User.dart';
@@ -15,6 +18,30 @@ class TabsScreen extends StatefulWidget {
   List<Book> myBooks;
   TabsScreen(this.user, this.bookList, this.myBooks, {Key key}) : super(key: key);
 
+  Future<User> getUser() async {
+    await Socket.connect("10.0.2.2", 2424).then((socket) {
+      socket.write("get_user_info\n \u0000");
+      socket.listen((response) {
+        var info = jsonDecode(String.fromCharCodes(response));
+        user.email = info['email'];
+        user.userName = info['userName'];
+        user.name = info['name'];
+        user.familyName = info['familyName'];
+        user.credit = info['credit'];
+        user.password = info['password'];
+        List<dynamic> bookIds =info['booksIds'];
+        List<Book> appUserBooks = [];
+        bookIds.forEach((element) {
+          Book b;
+          bookList.forEach((someBook) {if(someBook.id == element) appUserBooks.add(someBook);});
+        });
+        user.books = appUserBooks;
+        print(user.books);
+        print(user.credit);
+      });
+    });
+  }
+
 
   @override
   State<TabsScreen> createState() => _TabsScreenState();
@@ -24,8 +51,11 @@ class _TabsScreenState extends State<TabsScreen> {
   List<Map<String, Object>> _pages;
   int _selectedPageIndex = 0;
 
+
+
   void _selectPage(int index) {
     setState(() {
+      widget.getUser();
       _selectedPageIndex = index;
     });
   }
@@ -33,6 +63,8 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     super.initState();
+    widget.getUser();
+
     _pages = [
       {'page': HomeScreen(widget.bookList, widget.user), 'title': 'Home'},
       {'page': ShopScreen(widget.bookList, widget.user), 'title': 'Shop'},

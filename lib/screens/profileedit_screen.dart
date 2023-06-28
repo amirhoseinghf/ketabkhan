@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/User.dart';
@@ -55,7 +58,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             height: 10,
           ),
           Text(
-            widget.user.name != null
+            (widget.user.name != null && widget.user.name != "admin")
                 ? "${widget.user.name} ${widget.user.familyName}"
                 : widget.user.userName,
             style: Theme.of(context).textTheme.titleSmall,
@@ -91,7 +94,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.name = result;
                     },
-                    initialValue: widget.user.name,
+                    initialValue: widget.user.name == "admin" ? null : widget.user.name,
                   ),
                   const SizedBox(
                     height: 15,
@@ -109,7 +112,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.familyName = result;
                     },
-                    initialValue: widget.user.familyName,
+                    initialValue: widget.user.familyName == "admin" ? null : widget.user.familyName,
                   ),
                   const SizedBox(
                     height: 15,
@@ -136,8 +139,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       width: 300,
                       height: 40,
                       child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState.validate()) {
+                              await Socket.connect("10.0.2.2", 2424).then((socket){
+                                var userInfo = widget.user.toJson();
+                                socket.write("save_info\n${userInfo}\u0000");
+                                socket.listen((event) {print(event);});
+                              });
                               setState(() {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(

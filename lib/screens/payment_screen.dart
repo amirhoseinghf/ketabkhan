@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/User.dart';
@@ -219,7 +221,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           width: 170,
                           height: 40,
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
+                              int amount = 0;
                               if (_formKey.currentState.validate()) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
@@ -249,28 +252,36 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                   case "10 هزار تومان":
                                     {
                                       widget.user.credit += 10;
+                                      amount = 10;
                                       Navigator.pop(context);
                                     }
                                     break;
                                   case "20 هزار تومان":
                                     {
                                       widget.user.credit += 20;
+                                      amount = 20;
                                       Navigator.pop(context);
                                     }
                                     break;
                                   case "30 هزار تومان":
                                     {
                                       widget.user.credit += 30;
+                                      amount = 30;
                                       Navigator.pop(context);
                                     }
                                     break;
                                   case "40 هزار تومان":
                                     {
                                       widget.user.credit += 40;
+                                      amount = 40;
                                       Navigator.pop(context);
                                     }
                                     break;
                                 }
+                                await Socket.connect("10.0.2.2", 2424).then((socket) {
+                                  socket.write("add_credit\n${amount}\u0000");
+                                  socket.listen((event) {print(event);});
+                                });
                               }
                             },
                             style: ElevatedButton.styleFrom(

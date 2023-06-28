@@ -20,4 +20,18 @@ class User {
       this.familyName,
       this.profileImageUrl,
       this.credit = 0});
+
+  Map<String,dynamic> toJson() => {
+    'email': this.email,
+    'userName': this.userName,
+    'name': this.name,
+    'familyName': this.familyName,
+    'profileImageUrl': this.profileImageUrl,
+    'credit':this.credit,
+  };
+
+
 }
+
+
+

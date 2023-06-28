@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ketabkhan/main.dart';
+import 'package:ketabkhan/screens/tabs_screen.dart';
 import '../models/Book.dart';
 import '../models/User.dart';
 import '../widgets/LinProg.dart';
@@ -174,11 +179,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
           Container(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {
-                setState(() {
+              onPressed: () async {
+                setState(()  {
                   if (widget.user.credit >= widget.book.price) {
-                    widget.user.books.add(widget.book);
-                    widget.user.credit -= widget.book.price;
+                    String json = jsonEncode(widget.book.toJson()).toString();
+                    print(json);
+                    print("SDSD");
+                    Socket.connect("10.0.2.2", 2424).then((socket) {
+                      socket.write("add_book\n ${widget.book.toJson().toString()} \u0000");
+                    });
+                    setState(() {
+                      widget.user.books.add(widget.book);
+                      widget.user.credit -= widget.book.price;
+                    });
                     ScaffoldMessenger.of(context)
                         .showSnackBar(SnackBar(
                       content: Directionality(
@@ -520,7 +533,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 bottomRight: Radius.circular(20))),
         actions: [
           IconButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                MyApp.of(context).getUser();
+                Navigator.pop(context);},
               icon: Icon(Icons.arrow_forward_ios_rounded))
         ],
         automaticallyImplyLeading: false,
