@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
 import 'package:ketabkhan/widgets/CurrentReadingBookWidget.dart';
@@ -13,8 +16,28 @@ class HomeScreen extends StatefulWidget {
 
   HomeScreen(this.dummy_books, this.user, {Key key}) : super(key: key);
 
+  Future<User> get_reading() async {
+    Socket.connect("10.0.2.2", 2424).then((socket) {
+      socket.write("get_user_info\n \u0000");
+      socket.listen((response) {
+        var info = jsonDecode(String.fromCharCodes(response));
+        List<dynamic> readingbookIds =info['readingIds'];
+        readingbookIds.forEach((element) {
+          Book b;
+          dummy_books.forEach((someBook) {
+            if(someBook.id == element){
+              if (!user.readingBooks.contains(someBook)){user.readingBooks.add(someBook);}
+            }
+          });
+        });
+        // print(info["readingIds"]);
+      });
+    });
+  }
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
+  List<Book> isReadingBooks = [];
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -23,9 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-
-    List<Book> isReadingBooks =
-        widget.dummy_books.where((element) => element.isReadingNow == true).toList();
+    widget.get_reading();
+    setState(() {
+      widget.get_reading();
+    });
 
 
     return DefaultTabController(
@@ -38,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: deviceSize.height * 0.42,
               color: Theme.of(context).primaryColor,
               child: Center(
-                child: isReadingBooks.isEmpty
+                child: widget.user.readingBooks.isEmpty
                     ? Column(
                       children: [
                         const SizedBox(height: 160,),
@@ -64,10 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   // margin: EdgeInsets.only(top: 12),
                                   child: ListView.builder(
                                     scrollDirection: Axis.horizontal,
-                                      itemCount: isReadingBooks.length,
+                                      itemCount: widget.user.readingBooks.length,
                                       shrinkWrap: true,
                                       itemBuilder: (ctx, i) {
-                                        return CurrentReadingBookWidget(isReadingBooks[i].name, isReadingBooks[i].imageUrl);
+                                        return CurrentReadingBookWidget(widget.user.readingBooks[i].name, widget.user.readingBooks[i].imageUrl);
                                       }),
                                 ),
                             ),

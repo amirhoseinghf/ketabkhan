@@ -15,10 +15,9 @@ import './screens/library_screen.dart';
 import './screens/payment_screen.dart';
 import './screens/profileedit_screen.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key key}) : super(key: key);
 
   @override
   State<MyApp> createState() => MyAppState();
@@ -26,6 +25,7 @@ class MyApp extends StatefulWidget {
 
   static MyAppState of(BuildContext context) => context.findAncestorStateOfType<MyAppState>();
 
+  List<Book> isReadingBooks = [];
 
 }
 
@@ -51,7 +51,8 @@ class MyAppState extends State<MyApp> {
 
 
   User appUser = User(email: "admin", userName: "admin", password: "admin");
-  static List<Book> boooks = [];
+
+
 
   Future<User> getUser() async {
     await Socket.connect("10.0.2.2", 2424).then((socket) {
@@ -75,7 +76,29 @@ class MyAppState extends State<MyApp> {
           }});
         });
         appUser.books = appUserBooks;
-        boooks = appUserBooks;
+      });
+    });
+  }
+
+  Future<User> get_reading() async {
+    Socket.connect("10.0.2.2", 2424).then((socket) {
+      socket.write("get_user_info\n \u0000");
+      socket.listen((response) {
+        var info = jsonDecode(String.fromCharCodes(response));
+        List<dynamic> readingbookIds =info['readingIds'];
+        readingbookIds.forEach((element) {
+          Book b;
+          dummy_books.forEach((someBook) {
+            if(someBook.id == element){
+              if (!appUser.readingBooks.contains(someBook)){
+                setState(() {
+                  appUser.readingBooks.add(someBook);
+                });
+              }
+            }
+          });
+        });
+        print(info["readingIds"]);
       });
     });
   }
@@ -284,6 +307,10 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    get_reading();
+    setState(() {
+      get_reading();
+    });
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Ketabkhan",

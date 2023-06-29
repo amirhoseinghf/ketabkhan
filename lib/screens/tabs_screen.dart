@@ -36,13 +36,33 @@ class TabsScreen extends StatefulWidget {
           bookList.forEach((someBook) {if(someBook.id == element) appUserBooks.add(someBook);});
         });
         user.books = appUserBooks;
-        print(user.books);
-        print(user.credit);
+        // print(user.books);
+        // print(user.credit);
       });
     });
   }
 
-
+  List<Book> isReadingBooks = [];
+  Future<User> get_reading() async {
+    Socket.connect("10.0.2.2", 2424).then((socket) {
+      socket.write("get_user_info\n \u0000");
+      socket.listen((response) {
+        var info = jsonDecode(String.fromCharCodes(response));
+        List<dynamic> readingbookIds = info['readingIds'];
+        readingbookIds.forEach((element) {
+          Book b;
+          bookList.forEach((someBook) {
+            if (someBook.id == element) {
+              if (!user.readingBooks.contains(someBook)) {
+                user.readingBooks.add(someBook);
+              }
+            }
+          });
+        });
+        // print(info["readingIds"]);
+      });
+    });
+  }
   @override
   State<TabsScreen> createState() => _TabsScreenState();
 }
@@ -56,6 +76,7 @@ class _TabsScreenState extends State<TabsScreen> {
   void _selectPage(int index) {
     setState(() {
       widget.getUser();
+      widget.get_reading();
       _selectedPageIndex = index;
     });
   }

@@ -11,6 +11,7 @@ class User {
   double credit = 0;
   String password;
   List<Book> books = [];
+  List<Book> readingBooks = [];
 
   User(
       {@required this.email,

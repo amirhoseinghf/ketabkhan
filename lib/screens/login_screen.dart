@@ -141,6 +141,7 @@ class LoginScreen extends StatelessWidget {
                                           socket.listen((response) {
                                             if(String.fromCharCodes(response) == "done") {
                                               MyApp.of(context).getUser();
+                                              MyApp.of(context).get_reading();
                                               Navigator.pushNamed(context, '/main');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(SnackBar(

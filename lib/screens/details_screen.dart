@@ -274,9 +274,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: 50,
                   child: OutlinedButton(
                     onPressed: () {
+                      // TODO Implement pdf reader
                       if (widget.user.books.contains(widget.book)) {
                         setState(() {
                           widget.book.isReadingNow = true;
+                          widget.user.readingBooks.add(widget.book);
+                          Socket.connect("10.0.2.2", 2424).then((socket) {
+                            socket.write("add_reading\n${widget.book.id}\u0000");
+                            socket.listen((event) {print(String.fromCharCodes(event));});
+                          });
                         });
                       } else {
                         ScaffoldMessenger.of(context)
