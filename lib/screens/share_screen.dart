@@ -84,7 +84,7 @@ class ShareScreen extends StatelessWidget {
                   Container(
                       padding: EdgeInsets.all(10),
                       child: Icon(
-                        Icons.lightbulb,
+                        Icons.motion_photos_on,
                         size: 30,
                         color: Colors.amber,
                       )),

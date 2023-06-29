@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                                 TextFormField(
                                   decoration: InputDecoration(
                                       label: const Text("ایمیل"),
-                                      labelStyle: const TextStyle(fontSize: 20),
+                                      labelStyle: Theme.of(context).textTheme.headlineSmall,
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),
@@ -112,7 +112,7 @@ class LoginScreen extends StatelessWidget {
                                   obscureText: true,
                                   decoration: InputDecoration(
                                       label: const Text("رمز عبور"),
-                                      labelStyle: const TextStyle(fontSize: 20),
+                                      labelStyle: Theme.of(context).textTheme.headlineSmall,
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15)),

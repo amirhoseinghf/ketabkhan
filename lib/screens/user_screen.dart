@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ketabkhan/main.dart';
+import 'package:ketabkhan/screens/payment_screen.dart';
 
 import '../models/User.dart';
 
@@ -326,7 +327,7 @@ class _UserScreenState extends State<UserScreen> {
                         height: 6,
                       ),
                       optionsTile("خرید اشتراک ویژه",
-                          Icons.monetization_on_outlined, () {}),
+                          Icons.monetization_on_outlined, () {Navigator.pushNamed(context, "/payment");}),
                       const SizedBox(
                         height: 6,
                       ),

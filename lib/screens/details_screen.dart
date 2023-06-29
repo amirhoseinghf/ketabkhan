@@ -156,7 +156,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     color: Colors.grey,
                   ),
                 ),
-                ignoreGestures: true,
+                ignoreGestures: true, onRatingUpdate: (double value) {  },
               ),
               SizedBox(
                 height: 5,
@@ -292,7 +292,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               child: Row(
                                 children: [
                                   Icon(
-                                    Icons.motion_photos_on_outlined,
+                                    Icons.warning_amber_rounded,
                                     color: Colors.black,
                                   ),
                                   SizedBox(

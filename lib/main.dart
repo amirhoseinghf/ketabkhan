@@ -316,7 +316,7 @@ class MyAppState extends State<MyApp> {
       title: "Ketabkhan",
       theme: ThemeData(
           primaryColor: const Color.fromRGBO(11, 94, 160, 1),
-          accentColor: const Color.fromRGBO(63, 220, 255, 1),
+          hintColor: const Color.fromRGBO(63, 220, 255, 1),
           canvasColor: const Color.fromRGBO(221, 240, 255, 1),
           fontFamily: "IranSansNum",
           brightness: Brightness.light,
