@@ -66,6 +66,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 "شماره کارت",
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
+                                counterStyle: Theme.of(context).textTheme.bodySmall,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -103,6 +104,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               suffixIcon: const Icon(Icons.password),
+                              counterStyle: Theme.of(context).textTheme.bodySmall
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (val) {

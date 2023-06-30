@@ -69,7 +69,18 @@ class _LibraryScreenState extends State<LibraryScreen> {
           centerTitle: true,
           bottom: const TabBar(tabs: [Tab(child: Text("کتاب های شما", style: TextStyle(fontFamily: "IranSans"),),)],),
         ),
-        body: GridView(
+        body: widget.user.books.isEmpty ?
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset("assets/images/waiting.png", height: 250, color: Colors.black),
+                  Text("!هنوز کتابی نداری", style: Theme.of(context).textTheme.headlineLarge,)
+                ],
+              ),
+            )
+
+            :GridView(
           padding: const EdgeInsets.all(20),
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
