@@ -75,7 +75,7 @@ class _UserScreenState extends State<UserScreen> {
             height: 10,
           ),
           Text(
-            "اعتبار: ${widget.user.credit.toStringAsFixed(0)} تومان",
+            "اعتبار: ${widget.user.credit.toStringAsFixed(0)} هزار تومان",
             style: TextStyle(
                 color: current == ThemeMode.light ||
                         (current == ThemeMode.system &&

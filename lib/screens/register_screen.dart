@@ -34,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               textDirection: TextDirection.rtl,
               child: Center(
                 child: SizedBox(
-                    height: deviceSize.height * 0.6,
+                    height: deviceSize.height * 0.72,
                     width: deviceSize.width * 0.8,
                     child: Card(
                       elevation: 3,
@@ -189,6 +189,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         child: Text("ثبت نام", style: TextStyle(fontSize: 17, fontFamily: "IranSans", color: widget.themeMode == ThemeMode.dark || (widget.themeMode == ThemeMode.system && ThemeMode.system == ThemeMode.dark) ? Colors.black : Colors.white),),
                                       ),
                                     ),
+                                    SizedBox(height: 5,),
+                                    TextButton(child: Text("بازگشت", style: Theme.of(context).textTheme.bodyMedium,), onPressed: () => Navigator.pop(context),)
 
                                   ],
                                 ),

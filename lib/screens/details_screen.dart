@@ -181,7 +181,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: ElevatedButton(
               onPressed: () async {
                 setState(()  {
-                  if (widget.user.credit >= widget.book.price) {
+                  if (widget.user.credit >= widget.book.price && !widget.user.books.contains(widget.book)) {
                     String json = jsonEncode(widget.book.toJson()).toString();
                     print(json);
                     print("SDSD");
@@ -275,7 +275,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   child: OutlinedButton(
                     onPressed: () {
                       // TODO Implement pdf reader
-                      if (widget.user.books.contains(widget.book)) {
+                      if (widget.user.books.contains(widget.book) && !widget.user.readingBooks.contains(widget.book)) {
                         setState(() {
                           widget.book.isReadingNow = true;
                           widget.user.readingBooks.add(widget.book);
