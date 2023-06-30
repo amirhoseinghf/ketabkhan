@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import '../models/User.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   static const routeName = "/edit";
   User user;
+  String path;
 
   ProfileEditScreen(this.user, {Key key}) : super(key: key);
 
@@ -22,6 +24,36 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   String imageUrl;
 
+  String dropDownMenuValue = "از گالری";
+
+  String profileImagePath = "";
+
+  void pickFromGallery() async {
+  XFile file = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (file != null) {
+    widget.path = file.path;
+  }
+
+  setState(() {
+    widget.user.profileImg = Image.file(File(widget.path));
+    widget.user.profileImgPath = file.path;
+  });
+
+  }
+
+  void pickFromCamera() async {
+    XFile file = await ImagePicker().pickImage(source: ImageSource.camera);
+    if (file != null) {
+      widget.path = file.path;
+      profileImagePath = file.path;
+    }
+    setState(() {
+      widget.user.profileImg = Image.file(File(widget.path));
+      widget.user.profileImgPath = file.path;
+    });
+
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget userDetails() {
@@ -30,30 +62,58 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           const SizedBox(
             height: 35,
           ),
-          Container(
-              height: 140,
-              decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(500)),
-              padding: const EdgeInsets.all(15),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(500),
-                  child: widget.user.profileImageUrl != null
-                      ? Image.network(
-                          widget.user.profileImageUrl,
-                          fit: BoxFit.contain,
-                          // color: Colors.white,
-                          height: 5,
-                          errorBuilder: (context, child, loadingProgress) =>
-                              Image.network(
-                            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
-                            color: Colors.white,
-                          ),
-                        )
-                      : Image.network(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+          Stack(
+            children: [
+              Container(
+                  height: 140,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(500)),
+                  padding: const EdgeInsets.all(15),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(500),
+                      child: widget.user.profileImgPath != null
+                          ? Image.file(
+                              File(widget.user.profileImgPath),
+                              fit: BoxFit.contain,
+                              // color: Colors.white,
+                              height: 5,
+                              errorBuilder: (context, child, loadingProgress) =>
+                                  Image.network(
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+                                color: Colors.white,
+                              ),
+                            )
+                          : Image.network(
+                              "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png",
+                              color: Colors.white,
+                            ))),
+              Positioned(
+                  bottom: 10,
+                  left: 10,
+                  child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
                           color: Colors.white,
-                        ))),
+                          borderRadius: BorderRadius.circular(1000),
+                          border: Border.all()),
+                      child: PopupMenuButton<String>(
+                        icon: Icon(Icons.edit, color: Colors.black, size: 20,),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                          PopupMenuItem(child: Text("از دوربین", style: TextStyle(fontFamily: "IranSansNum", color: Colors.black),), value: "camera",),
+                          PopupMenuItem(child: Text("از گالری", style: TextStyle(fontFamily: "IranSansNum", color: Colors.black),), value: "gallery",),
+                        ],
+                        onSelected: (result) {
+                          switch (result) {
+                            case "camera": pickFromCamera(); break;
+                            case "gallery": pickFromGallery(); break;
+                          }
+                        },
+                        color: Colors.white,
+                      )))
+            ],
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -94,7 +154,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.name = result;
                     },
-                    initialValue: widget.user.name == "admin" ? null : widget.user.name,
+                    initialValue:
+                        widget.user.name == "admin" ? null : widget.user.name,
                   ),
                   const SizedBox(
                     height: 15,
@@ -112,26 +173,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                     onChanged: (result) {
                       widget.user.familyName = result;
                     },
-                    initialValue: widget.user.familyName == "admin" ? null : widget.user.familyName,
+                    initialValue: widget.user.familyName == "admin"
+                        ? null
+                        : widget.user.familyName,
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                        label: const Text("آدرس تصویر"),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15))),
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    validator: (result) {
-                      if (result.isEmpty) return "این فیلد نباید خالی باشد.";
-                      return null;
-                    },
-                    onChanged: (result) {
-                      widget.user.profileImageUrl = result;
-                    },
-                    initialValue: widget.user.profileImageUrl,
-                  ),
+
                   const SizedBox(
                     height: 30,
                   ),
@@ -141,10 +187,15 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       child: ElevatedButton(
                           onPressed: () async {
                             if (formKey.currentState.validate()) {
-                              await Socket.connect("10.0.2.2", 2424).then((socket){
+                              await Socket.connect("10.0.2.2", 2424)
+                                  .then((socket) {
                                 var userInfo = widget.user.toJson();
-                                socket.write("save_info\n${userInfo}\u0000");
-                                socket.listen((event) {print(event);});
+                                var userInfoString = jsonEncode(widget.user,);
+                                // userInfo = jsonEncode(object)
+                                socket.write("save_info\n${userInfoString}\u0000");
+                                socket.listen((event) {
+                                  print(event);
+                                });
                               });
                               setState(() {
                                 ScaffoldMessenger.of(context)
@@ -174,8 +225,14 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                               });
                             }
                           },
-                          style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).buttonColor, shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                          child: Text("ذخیره", style: Theme.of(context).textTheme.titleMedium,)))
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(context).buttonColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                          child: Text(
+                            "ذخیره",
+                            style: Theme.of(context).textTheme.titleMedium,
+                          )))
                 ],
               ),
             )),
@@ -195,7 +252,13 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
           height: 27,
         ),
         centerTitle: true,
-        actions: [IconButton(onPressed: () {Navigator.pop(context);}, icon: const Icon(Icons.arrow_forward_ios_rounded))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.arrow_forward_ios_rounded))
+        ],
       ),
       body: SingleChildScrollView(
         child: Center(

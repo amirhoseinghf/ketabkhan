@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_svg/svg.dart';
 import 'package:ketabkhan/main.dart';
 import 'package:ketabkhan/screens/payment_screen.dart';
@@ -39,10 +40,10 @@ class _UserScreenState extends State<UserScreen> {
               padding: const EdgeInsets.all(15),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(500),
-                  child: widget.user.profileImageUrl != null
-                      ? Image.network(
-                          widget.user.profileImageUrl,
-                          fit: BoxFit.fill,
+                  child: widget.user.profileImgPath != null
+                      ? Image.file(
+                          File(widget.user.profileImgPath),
+                          fit: BoxFit.cover,
 // color: Colors.white,
                           height: 5,
                           errorBuilder: (context, child, loadingProgress) =>
