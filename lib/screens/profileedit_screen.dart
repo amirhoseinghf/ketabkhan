@@ -144,6 +144,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   TextFormField(
                     decoration: InputDecoration(
                         label: const Text("نام"),
+                        labelStyle: Theme.of(context).textTheme.headlineSmall,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -163,6 +164,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                   TextFormField(
                     decoration: InputDecoration(
                         label: const Text("نام خانوادگی"),
+                        labelStyle: Theme.of(context).textTheme.headlineSmall,
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15))),
                     style: Theme.of(context).textTheme.headlineSmall,
@@ -189,9 +191,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             if (formKey.currentState.validate()) {
                               await Socket.connect("10.0.2.2", 2424)
                                   .then((socket) {
-                                var userInfo = widget.user.toJson();
+                                // var userInfo = widget.user.toJson();
                                 var userInfoString = jsonEncode(widget.user,);
-                                // userInfo = jsonEncode(object)
                                 socket.write("save_info\n${userInfoString}\u0000");
                                 socket.listen((event) {
                                   print(event);
