@@ -65,6 +65,8 @@ class MyAppState extends State<MyApp> {
         appUser.familyName = info['familyName'];
         appUser.credit = info['credit'];
         appUser.password = info['password'];
+        appUser.profileImgPath = info['profileImgPath'];
+        appUser.profileImg = Image.file(File(appUser.profileImgPath));
         List<dynamic> bookIds =info['booksIds'];
         List<Book> appUserBooks = [];
         bookIds.forEach((element) {

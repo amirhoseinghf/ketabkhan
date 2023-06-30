@@ -29,6 +29,8 @@ class TabsScreen extends StatefulWidget {
         user.familyName = info['familyName'];
         user.credit = info['credit'];
         user.password = info['password'];
+        user.profileImgPath = info['profileImgPath'];
+        user.profileImg = Image.file(File(user.profileImgPath));
         List<dynamic> bookIds =info['booksIds'];
         List<Book> appUserBooks = [];
         bookIds.forEach((element) {

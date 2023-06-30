@@ -85,7 +85,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextFormField(
                                       decoration: InputDecoration(
                                           label: const Text("ایمیل"),
-                                          labelStyle: const TextStyle(fontSize: 20),
+                                          labelStyle: Theme.of(context).textTheme.headlineSmall,
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: const Icon(Icons.mail)),
@@ -111,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextFormField(
                                       decoration: InputDecoration(
                                           label: const Text("نام کاربری"),
-                                          labelStyle: const TextStyle(fontSize: 20),
+                                          labelStyle: Theme.of(context).textTheme.headlineSmall,
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: const Icon(Icons.person)),
@@ -130,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           label: const Text("رمز عبور"),
-                                          labelStyle: const TextStyle(fontSize: 20),
+                                          labelStyle: Theme.of(context).textTheme.headlineSmall,
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: const Icon(Icons.key)),
@@ -155,7 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           label: const Text("تکرار رمز عبور"),
-                                          labelStyle: const TextStyle(fontSize: 20),
+                                          labelStyle: Theme.of(context).textTheme.headlineSmall,
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.circular(15)),
                                           suffixIcon: const Icon(Icons.key)),
