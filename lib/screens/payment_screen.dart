@@ -3,7 +3,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/user.dart';
+<<<<<<< HEAD
 import '../widgets/CardWidget.dart';
+=======
+import '../widgets/card_widget.dart';
+>>>>>>> NewFeatures
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment';
@@ -66,6 +70,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 "شماره کارت",
                                 style: Theme.of(context).textTheme.titleSmall,
                               ),
+                                counterStyle: Theme.of(context).textTheme.bodySmall,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -103,6 +108,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               suffixIcon: const Icon(Icons.password),
+                              counterStyle: Theme.of(context).textTheme.bodySmall
                             ),
                             keyboardType: TextInputType.number,
                             onChanged: (val) {

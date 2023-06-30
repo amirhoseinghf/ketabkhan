@@ -1,7 +1,11 @@
 
 import 'package:flutter/material.dart';
 import '../models/user.dart';
+<<<<<<< HEAD
 import '../widgets/BookWidget.dart';
+=======
+import '../widgets/book_widget.dart';
+>>>>>>> NewFeatures
 import '../models/book.dart';
 
 class HomeEbooksScreen extends StatelessWidget {

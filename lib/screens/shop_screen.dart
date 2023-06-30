@@ -3,7 +3,11 @@ import 'package:flutter_svg/svg.dart';
 
 import '../models/book.dart';
 import '../models/user.dart';
+<<<<<<< HEAD
 import '../widgets/BookWidget.dart';
+=======
+import '../widgets/book_widget.dart';
+>>>>>>> NewFeatures
 import 'details_screen.dart';
 
 class ShopScreen extends StatefulWidget {
