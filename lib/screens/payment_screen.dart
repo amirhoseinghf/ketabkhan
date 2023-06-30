@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../models/User.dart';
-import '../widgets/CardWidget.dart';
+import '../models/user.dart';
+import '../widgets/card_widget.dart';
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment';

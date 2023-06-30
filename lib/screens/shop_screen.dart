@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../models/Book.dart';
-import '../models/User.dart';
-import '../widgets/BookWidget.dart';
+import '../models/book.dart';
+import '../models/user.dart';
+import '../widgets/book_widget.dart';
 import 'details_screen.dart';
 
 class ShopScreen extends StatefulWidget {

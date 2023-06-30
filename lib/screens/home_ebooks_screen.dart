@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import '../models/User.dart';
-import '../widgets/BookWidget.dart';
-import '../models/Book.dart';
+import '../models/user.dart';
+import '../widgets/book_widget.dart';
+import '../models/book.dart';
 
 class HomeEbooksScreen extends StatelessWidget {
   List<Book> dummy;

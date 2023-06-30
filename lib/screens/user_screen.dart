@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:ketabkhan/main.dart';
 import 'package:ketabkhan/screens/payment_screen.dart';
 
-import '../models/User.dart';
+import '../models/user.dart';
 
 class UserScreen extends StatefulWidget {
   static const routeName = '/user';

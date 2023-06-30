@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
-import '../models/User.dart';
+import '../models/user.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   static const routeName = "/edit";

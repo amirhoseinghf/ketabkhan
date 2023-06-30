@@ -6,10 +6,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ketabkhan/main.dart';
 import 'package:ketabkhan/screens/tabs_screen.dart';
-import '../models/Book.dart';
-import '../models/User.dart';
-import '../widgets/LinProg.dart';
-import '../widgets/BookWidget.dart';
+import '../models/book.dart';
+import '../models/user.dart';
+import '../widgets/linear_progress.dart';
+import '../widgets/book_widget.dart';
 import './share_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
