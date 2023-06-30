@@ -324,7 +324,7 @@ class MyAppState extends State<MyApp> {
           brightness: Brightness.light,
           appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
           textTheme: const TextTheme(
-            bodyLarge: TextStyle(fontSize: 20, color: Colors.white,),
+            bodyLarge: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "IranSansNum", fontWeight: FontWeight.bold),
             bodyMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16, textBaseline: TextBaseline.alphabetic),
             bodySmall: TextStyle(color: Colors.black, fontSize: 16),
               headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),

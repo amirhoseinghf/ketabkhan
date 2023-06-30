@@ -3,11 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
-<<<<<<< HEAD
-import 'package:ketabkhan/widgets/CurrentReadingBookWidget.dart';
-=======
+
 import 'package:ketabkhan/widgets/current_reading_book_widget.dart';
->>>>>>> NewFeatures
 import '../models/user.dart';
 import './home_ebooks_screen.dart';
 import '../models/book.dart';

@@ -3,11 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../models/user.dart';
-<<<<<<< HEAD
-import '../widgets/CardWidget.dart';
-=======
+
 import '../widgets/card_widget.dart';
->>>>>>> NewFeatures
 
 class PaymentScreen extends StatefulWidget {
   static const routeName = '/payment';

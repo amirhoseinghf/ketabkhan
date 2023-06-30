@@ -5,11 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ketabkhan/main.dart';
 import '../models/user.dart';
-<<<<<<< HEAD
-import '../widgets/BookWidget.dart';
-=======
+
 import '../widgets/book_widget.dart';
->>>>>>> NewFeatures
 import '../models/book.dart';
 
 class LibraryScreen extends StatefulWidget {
@@ -78,7 +75,7 @@ class _LibraryScreenState extends State<LibraryScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset("assets/images/waiting.png", height: 250, color: Colors.black),
+                  Image.asset("assets/images/waiting.png", height: 250, color: Theme.of(context).textTheme.headlineLarge.color),
                   Text("!هنوز کتابی نداری", style: Theme.of(context).textTheme.headlineLarge,)
                 ],
               ),
