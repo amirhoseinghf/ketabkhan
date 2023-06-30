@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../models/Book.dart';
-import '../models/User.dart';
+import '../models/book.dart';
+import '../models/user.dart';
 import '../widgets/BookWidget.dart';
 import 'details_screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/User.dart';
+import '../models/user.dart';
 import '../widgets/BookWidget.dart';
-import '../models/Book.dart';
+import '../models/book.dart';
 
 class HomeSoundBooksScreen extends StatelessWidget {
   List<Book> dummy;

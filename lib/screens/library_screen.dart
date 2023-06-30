@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ketabkhan/main.dart';
-import '../models/User.dart';
+import '../models/user.dart';
 import '../widgets/BookWidget.dart';
-import '../models/Book.dart';
+import '../models/book.dart';
 
 class LibraryScreen extends StatefulWidget {
   static const routeName = "/library";

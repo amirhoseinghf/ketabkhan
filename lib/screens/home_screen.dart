@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
 import 'package:ketabkhan/widgets/CurrentReadingBookWidget.dart';
-import '../models/User.dart';
+import '../models/user.dart';
 import './home_ebooks_screen.dart';
-import '../models/Book.dart';
+import '../models/book.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";

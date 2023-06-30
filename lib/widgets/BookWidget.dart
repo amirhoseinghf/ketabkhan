@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/details_screen.dart';
 
-import '../models/Book.dart';
-import '../models/User.dart';
+import '../models/book.dart';
+import '../models/user.dart';
 
 
 class BookWidget extends StatefulWidget {

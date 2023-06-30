@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../models/Book.dart';
-import '../models/User.dart';
+import '../models/book.dart';
+import '../models/user.dart';
 import 'library_screen.dart';
 import 'shop_screen.dart';
 import 'user_screen.dart';

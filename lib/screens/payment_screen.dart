@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../models/User.dart';
+import '../models/user.dart';
 import '../widgets/CardWidget.dart';
 
 class PaymentScreen extends StatefulWidget {
