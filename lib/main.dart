@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './providers/books_data.dart';
+import './models/book.dart';
+import './models/user.dart';
 import './screens/tabs_screen.dart';
 import './screens/shop_screen.dart';
 import './screens/user_screen.dart';
-import './models/book.dart';
-import './models/user.dart';
 import './screens/details_screen.dart';
 import './screens/home_screen.dart';
 import './screens/login_screen.dart';
@@ -238,74 +240,6 @@ class MyAppState extends State<MyApp> {
     ),
   ];
 
-  List<Book> tempList = [
-    Book(
-        id: "A1",
-        name: "کتابخانه نیمه‌ شب",
-        author: "مت هیگ",
-        price: 25,
-        category: Categoryz.newRelease,
-        type: Type.ebooks,
-        imageUrl:
-        "https://newcdn.fidibo.com/images/books/125302_50943_normal.jpg?width=200"),
-    Book(
-        id: "A2",
-        name: "محکم در آغوشم بگیر",
-        author: "سو آنسن",
-        price: 39,
-        category: Categoryz.topSelling,
-        type: Type.soundBooks,
-        imageUrl:
-        "https://newcdn.fidibo.com/images/books/136671_72256_normal.jpg?width=200"),
-    Book(
-        id: "A3",
-        name: "خرده‌ عادت‌ ها",
-        author: "جیمز کلیر",
-        price: 45,
-        category: Categoryz.favorite,
-        type: Type.ebooks,
-        imageUrl:
-        "https://newcdn.fidibo.com/images/books/136068_15784_normal.jpg?width=200"),
-    Book(
-        id: "A4",
-        name: "بی‌ حد و مرز",
-        author: "جیمز کوییک",
-        price: 79,
-        category: Categoryz.newRelease,
-        type: Type.soundBooks,
-        imageUrl:
-        "https://newcdn.fidibo.com/images/books/136159_76305_normal.jpg?width=200"),
-    Book(
-        id: "A5",
-        name: "حافظه نامحدود",
-        author: "کوین هرسلی",
-        price: 95,
-        category: Categoryz.topSelling,
-        type: Type.ebooks,
-        imageUrl:
-        "https://newcdn.fidibo.com/images/books/86186_36247_normal.jpg?width=200",
-        isReadingNow: true),
-    Book(
-      id: "A6",
-      name: "بخشنده",
-      author: "لوئیس لوری",
-      price: 37,
-      category: Categoryz.favorite,
-      type: Type.soundBooks,
-      imageUrl:
-      "https://newcdn.fidibo.com/images/books/78598_85402_normal.jpg?width=200",
-    ),
-    Book(
-      id: "A7",
-      name: "1984",
-      author: "جورج اورول",
-      price: 24,
-      category: Categoryz.topSelling,
-      type: Type.ebooks,
-      imageUrl:
-      "https://newcdn.fidibo.com/images/books/99473_44720_normal.jpg?width=200",
-    ),];
-
 
   @override
   Widget build(BuildContext context) {
@@ -313,62 +247,65 @@ class MyAppState extends State<MyApp> {
     setState(() {
       get_reading();
     });
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Ketabkhan",
-      theme: ThemeData(
-          primaryColor: const Color.fromRGBO(11, 94, 160, 1),
-          hintColor: const Color.fromRGBO(63, 220, 255, 1),
-          canvasColor: const Color.fromRGBO(221, 240, 255, 1),
-          fontFamily: "IranSansNum",
-          brightness: Brightness.light,
-          appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
-          textTheme: const TextTheme(
-            bodyLarge: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "IranSansNum", fontWeight: FontWeight.bold),
-            bodyMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16, textBaseline: TextBaseline.alphabetic),
-            bodySmall: TextStyle(color: Colors.black, fontSize: 16),
-              headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
-              headlineSmall: TextStyle(color: Colors.black, fontSize: 20),
-              headlineMedium: TextStyle(color: Colors.black, fontSize: 23, fontFamily: "IranSans",),
-            titleSmall: TextStyle(color: Colors.black, fontSize: 18),
-            titleMedium: TextStyle(color: Colors.white, fontSize: 20,),
-            titleLarge: TextStyle(color: Colors.black, fontSize: 20),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => BooksData()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Ketabkhan",
+        theme: ThemeData(
+            primaryColor: const Color.fromRGBO(11, 94, 160, 1),
+            hintColor: const Color.fromRGBO(63, 220, 255, 1),
+            canvasColor: const Color.fromRGBO(221, 240, 255, 1),
+            fontFamily: "IranSansNum",
+            brightness: Brightness.light,
+            appBarTheme: AppBarTheme(color: Theme.of(context).primaryColor),
+            textTheme: const TextTheme(
+              bodyLarge: TextStyle(fontSize: 20, color: Colors.white, fontFamily: "IranSansNum", fontWeight: FontWeight.bold),
+              bodyMedium: TextStyle(color: Color.fromRGBO(11, 94, 160, 1), fontSize: 16, textBaseline: TextBaseline.alphabetic),
+              bodySmall: TextStyle(color: Colors.black, fontSize: 16),
+                headlineLarge: TextStyle(color: Colors.black, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
+                headlineSmall: TextStyle(color: Colors.black, fontSize: 20),
+                headlineMedium: TextStyle(color: Colors.black, fontSize: 23, fontFamily: "IranSans",),
+              titleSmall: TextStyle(color: Colors.black, fontSize: 18),
+              titleMedium: TextStyle(color: Colors.white, fontSize: 20,),
+              titleLarge: TextStyle(color: Colors.black, fontSize: 20),
 
-          ),
-        buttonColor: const Color.fromRGBO(11, 94, 160, 1),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        textTheme: const TextTheme(
-        bodyLarge: TextStyle(fontSize: 24, color: Colors.white, fontFamily: "IranSansNum"),
-        bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic, fontFamily: "IranSans"),
-        bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
-        headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
-        headlineMedium: TextStyle(color: Colors.white, fontSize: 23, fontFamily: "IranSans"),
-            headlineSmall: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "IranSansNum"),
-        titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSansNum" ),
-        titleMedium: TextStyle(color: Colors.black, fontSize: 19, fontFamily: "IranSans"),
-            titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans")
+            ),
+          buttonColor: const Color.fromRGBO(11, 94, 160, 1),
         ),
-        buttonColor: Colors.white,
+        darkTheme: ThemeData.dark().copyWith(
+          textTheme: const TextTheme(
+          bodyLarge: TextStyle(fontSize: 24, color: Colors.white, fontFamily: "IranSansNum"),
+          bodyMedium: TextStyle(color: Colors.white, fontSize: 16, textBaseline: TextBaseline.alphabetic, fontFamily: "IranSans"),
+          bodySmall: TextStyle(color: Colors.white, fontSize: 16, fontFamily: "IranSans"),
+          headlineLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans", fontWeight: FontWeight.bold),
+          headlineMedium: TextStyle(color: Colors.white, fontSize: 23, fontFamily: "IranSans"),
+              headlineSmall: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "IranSansNum"),
+          titleSmall: TextStyle(color: Colors.white, fontSize: 18, fontFamily: "IranSansNum" ),
+          titleMedium: TextStyle(color: Colors.black, fontSize: 19, fontFamily: "IranSans"),
+              titleLarge: TextStyle(color: Colors.white, fontSize: 24, fontFamily: "IranSans")
+          ),
+          buttonColor: Colors.white,
+        ),
+        themeMode: _themeMode,
+
+        initialRoute: LoginScreen.routeName,
+        routes: {
+          TabsScreen.routeName: (context) => TabsScreen(appUser, appUser.books),
+          LoginScreen.routeName: (context) => LoginScreen(_themeMode),
+          RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
+          HomeScreen.routeName: (context) => HomeScreen(appUser),
+          DetailsScreen.routeName: (context) => DetailsScreen(),
+          LibraryScreen.routeName: (context) => LibraryScreen(appUser.books, appUser),
+          ShopScreen.routeName: (context) => ShopScreen(appUser),
+          UserScreen.routeName: (context) => UserScreen(appUser),
+          PaymentScreen.routeName: (context) => PaymentScreen(appUser),
+          ProfileEditScreen.routeName: (context) => ProfileEditScreen(appUser),
+        },
+
       ),
-      themeMode: _themeMode,
-
-
-
-      initialRoute: LoginScreen.routeName,
-      routes: {
-        TabsScreen.routeName: (context) => TabsScreen(appUser, dummy_books, appUser.books),
-        LoginScreen.routeName: (context) => LoginScreen(_themeMode),
-        RegisterScreen.routeName: (context) => RegisterScreen(_themeMode),
-        HomeScreen.routeName: (context) => HomeScreen(appUser.books, appUser),
-        DetailsScreen.routeName: (context) => DetailsScreen(),
-        LibraryScreen.routeName: (context) => LibraryScreen(appUser.books, appUser),
-        ShopScreen.routeName: (context) => ShopScreen(dummy_books, appUser),
-        UserScreen.routeName: (context) => UserScreen(appUser),
-        PaymentScreen.routeName: (context) => PaymentScreen(appUser),
-        ProfileEditScreen.routeName: (context) => ProfileEditScreen(appUser),
-      },
-
     );
   }
 }

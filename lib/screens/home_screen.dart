@@ -5,19 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:ketabkhan/screens/home_soundbooks_screen.dart';
 
 import 'package:ketabkhan/widgets/current_reading_book_widget.dart';
+import 'package:provider/provider.dart';
 import '../models/user.dart';
+import '../providers/books_data.dart';
 import './home_ebooks_screen.dart';
 import '../models/book.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
 
-  List<Book> dummy_books;
   User user;
 
-  HomeScreen(this.dummy_books, this.user, {Key key}) : super(key: key);
+  HomeScreen(this.user);
 
-  Future<User> get_reading() async {
+  Future<User> get_reading(BuildContext context) async {
+    List<Book> bookList = Provider.of<BooksData>(context).books;
     Socket.connect("10.0.2.2", 2424).then((socket) {
       socket.write("get_user_info\n \u0000");
       socket.listen((response) {
@@ -25,7 +27,7 @@ class HomeScreen extends StatefulWidget {
         List<dynamic> readingbookIds =info['readingIds'];
         readingbookIds.forEach((element) {
           Book b;
-          dummy_books.forEach((someBook) {
+          bookList.forEach((someBook) {
             if(someBook.id == element){
               if (!user.readingBooks.contains(someBook)){user.readingBooks.add(someBook);}
             }
@@ -47,10 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-    widget.get_reading();
+    widget.get_reading(context);
     setState(() {
-      widget.get_reading();
+      widget.get_reading(context);
     });
+
+    List<Book> bookList = Provider.of<BooksData>(context).books;
 
 
     return DefaultTabController(
@@ -121,11 +125,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeEbooksScreen(widget.dummy_books, widget.user),
+                    child: HomeEbooksScreen(widget.user),
                   ),
                   Container(
                     color: Theme.of(context).canvasColor,
-                    child: HomeSoundBooksScreen(widget.dummy_books, widget.user),
+                    child: HomeSoundBooksScreen(widget.user),
                   ),
                 ],
               ),

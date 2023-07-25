@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/book.dart';
 import '../models/user.dart';
+import '../providers/books_data.dart';
 import 'library_screen.dart';
 import 'shop_screen.dart';
 import 'user_screen.dart';
@@ -13,12 +15,12 @@ class TabsScreen extends StatefulWidget {
 
   static const routeName = "/main";
 
-  User user;
-  List<Book> bookList;
-  List<Book> myBooks;
-  TabsScreen(this.user, this.bookList, this.myBooks, {Key key}) : super(key: key);
 
-  Future<User> getUser() async {
+  User user;
+  List<Book> myBooks;
+  TabsScreen(this.user, this.myBooks,);
+
+  Future<User> getUser(BuildContext context, List<Book> bookList) async {
     await Socket.connect("10.0.2.2", 2424).then((socket) {
       socket.write("get_user_info\n \u0000");
       socket.listen((response) {
@@ -45,7 +47,7 @@ class TabsScreen extends StatefulWidget {
   }
 
   List<Book> isReadingBooks = [];
-  Future<User> get_reading() async {
+  Future<User> get_reading(List<Book> bookList) async {
     Socket.connect("10.0.2.2", 2424).then((socket) {
       socket.write("get_user_info\n \u0000");
       socket.listen((response) {
@@ -76,9 +78,10 @@ class _TabsScreenState extends State<TabsScreen> {
 
 
   void _selectPage(int index) {
+    var books = Provider.of<BooksData>(context, listen: false).books;
     setState(() {
-      widget.getUser();
-      widget.get_reading();
+      widget.getUser(context, books);
+      widget.get_reading(books);
       _selectedPageIndex = index;
     });
   }
@@ -86,11 +89,12 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     super.initState();
-    widget.getUser();
+    var books = Provider.of<BooksData>(context, listen: false).books;
+    widget.getUser(context, books);
 
     _pages = [
-      {'page': HomeScreen(widget.bookList, widget.user), 'title': 'Home'},
-      {'page': ShopScreen(widget.bookList, widget.user), 'title': 'Shop'},
+      {'page': HomeScreen(widget.user), 'title': 'Home'},
+      {'page': ShopScreen(widget.user), 'title': 'Shop'},
       {'page': LibraryScreen(widget.myBooks, widget.user), 'title': 'Library'},
       {'page': UserScreen(widget.user), 'title': 'User'}
     ];

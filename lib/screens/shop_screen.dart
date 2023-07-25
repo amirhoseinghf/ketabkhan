@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:provider/provider.dart';
+import '../providers/books_data.dart';
 import '../models/book.dart';
 import '../models/user.dart';
-
 import '../widgets/book_widget.dart';
-import 'details_screen.dart';
+import './details_screen.dart';
 
 class ShopScreen extends StatefulWidget {
   static const routeName = '/shop';
 
-  final List<Book> bookList;
   User user;
 
-  ShopScreen(this.bookList, this.user, {Key key}) : super(key: key);
+  ShopScreen(this.user);
 
   @override
   State<ShopScreen> createState() => _ShopScreenState();
@@ -29,8 +28,9 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   void initState() {
     super.initState();
-    filteredBooks = widget.bookList;
-    _searchController.addListener(_performSearch);
+    List<Book> books = Provider.of<BooksData>(context, listen: false).books;
+    filteredBooks = books;
+    _searchController.addListener(() => _performSearch(books));
   }
 
   @override
@@ -41,7 +41,7 @@ class _ShopScreenState extends State<ShopScreen> {
     super.dispose();
   }
 
-  Future<void> _performSearch() async {
+  Future<void> _performSearch(List<Book> books) async {
     setState(() {
       isLoading = true;
     });
@@ -49,7 +49,7 @@ class _ShopScreenState extends State<ShopScreen> {
     await Future.delayed(const Duration(milliseconds: 500));
 
     setState(() {
-      filteredBooks = widget.bookList
+      filteredBooks = books
           .where((element) => element.name
               .toLowerCase()
               .contains(_searchController.text.toLowerCase()))
@@ -61,7 +61,7 @@ class _ShopScreenState extends State<ShopScreen> {
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
-
+    List<Book> books = Provider.of<BooksData>(context).books;
     Widget searchBar() {
       return Center(
         child: Column(
@@ -265,13 +265,13 @@ class _ShopScreenState extends State<ShopScreen> {
           height: 250,
           width: double.infinity,
           child: ListView.builder(
-            itemCount: widget.bookList.length,
+            itemCount: books.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (ctx, i) {
-              widget.bookList.shuffle();
+              books.shuffle();
               return BookWidget(
               user: widget.user,
-              book: widget.bookList[i],);},
+              book: books[i],);},
 
           ),
         ),

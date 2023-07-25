@@ -1,17 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/user.dart';
 
+import '../providers/books_data.dart';
 import '../widgets/book_widget.dart';
 import '../models/book.dart';
 
 class HomeEbooksScreen extends StatelessWidget {
-  List<Book> dummy;
   User user;
-  HomeEbooksScreen(this.dummy, this.user, {Key key}) : super(key: key);
+  HomeEbooksScreen(this.user, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<Book> bookList = Provider.of<BooksData>(context).books;
 
     Widget headline(String title) {
       return Container(
@@ -35,7 +37,7 @@ class HomeEbooksScreen extends StatelessWidget {
       );
     }
 
-    List<Book> ebooksList = dummy.where((element) => element.type == Type.ebooks).toList();
+    List<Book> ebooksList = bookList.where((element) => element.type == Type.ebooks).toList();
     List<Book> favoritesList = ebooksList.where((element) => element.category == Categoryz.favorite).toList();
     List<Book> newList = ebooksList.where((element) => element.category == Categoryz.newRelease).toList();
     List<Book> topSellingList = ebooksList.where((element) => element.category == Categoryz.topSelling).toList();
